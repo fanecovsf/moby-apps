@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'styles/painel.css' %}" rel="stylesheet" />
+    <title>Passagens</title>
+</head>
+<body>
+    <h1>Bem-vindo, {{ user.username }}</h1>
+    <p>Email: {{ user.email }}</p>
+    
+    <h2>Passagens</h2>
+    <a href="{% url 'registrar_passagem' %}" class="btn btn-primary">Registrar Passagem</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Torre</th>
+                <th>Responsável</th>
+                <th>Receptor</th>
+                <th>Concluido</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for passagem in passagens %}
+            <tr>
+                <td>{{ passagem.titulo }}</td>
+                <td>{{ passagem.descricao }}</td>
+                <td>{{ passagem.torre.numero }}</td>
+                <td>{{ passagem.responsavel.username }}</td>
+                <td>{{ passagem.receptor.username }}</td>
+                <td>
+                    {% if passagem.concluido %}
+                        Concluído
+                    {% else %}
+                        Pendente
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

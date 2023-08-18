@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    /* Define um gradiente linear que combina azul e amarelo */
+    background: linear-gradient(45deg, #f1c40f, #3498db, #f1c40f);
+    /* Definir altura completa para cobrir todo o viewport */
+    height: 100vh;
+    /* Centralizar conteúdo verticalmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Configurar fonte e cor do texto */
+    font-family: Arial, sans-serif;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #ffffff;
+    padding: 2px;
+    font-size: 30px;
+
+}
+
+.tela-login {
+
+    background-color: rgb(0, 0, 0, 0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5%;
+    border-radius: 5%;
+
+}
+
+input {
+
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.enviar {
+
+    background-color: #017eff;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.solicitar_acesso {
+    background-color: #e2d523;
+    padding: 5px;
+    width: 100%;
+    border-radius: 10%;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.enviar:hover {
+
+    background-color: deepskyblue;
+}
+
+.solicitar_acesso:hover {
+
+    background-color: rgb(251, 255, 0);
+}
+
+.enviar_solicitacao {
+
+    background-color: #017eff;
+    padding: 10px;
+    width: 60%;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+
+}
+
+.solicitacao {
+    color: #ffffff;
+    padding: 2px;
+    font-size: 20px;
+
+}

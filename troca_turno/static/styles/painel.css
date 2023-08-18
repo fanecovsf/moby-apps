@@ -1,0 +1,73 @@
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+.header {
+    background-color: #ffc000;
+    padding: 10px;
+    color: #fff;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Botão de registro */
+.btn-registrar {
+    float: right;
+    margin-top: -40px;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Cores */
+.btn-primary {
+    background-color: #5b9bd5;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    table th, table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-registrar {
+        float: none;
+        margin-top: 10px;
+    }
+}

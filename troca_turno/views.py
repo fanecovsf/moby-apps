@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from troca_turno.services import MobyUserService
 
@@ -20,3 +21,14 @@ class Views:
                 return HttpResponse('Usuário não existente')
 
         return render(request, 'login.html')
+
+
+    @login_required(login_url='/troca-turno/login/')
+    def painel_principal(request):
+        user = request.user
+        passagens = None
+
+        return render(request, 'painel.html', context={
+            'user':user,
+            'passagens':passagens
+        })

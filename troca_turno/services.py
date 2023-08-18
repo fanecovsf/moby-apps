@@ -22,7 +22,7 @@ class MobyUserService:
             return None
      
     @staticmethod
-    def get(email):
+    def get_email(email):
         try:
             usuario = MobyUser.objects.using(DATABASE).get(email=email)
             return usuario

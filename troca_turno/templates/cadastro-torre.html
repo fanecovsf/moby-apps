@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'styles/style-cadastro-torre.css' %}" rel="stylesheet" />
+    <title>Cadastrar Torre</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cadastrar Torre</h1>
+        </div>
+        <form action="{% url 'cadastro-torre' %}" method="post">
+            {% csrf_token %}
+            <label for="numero">Número:</label>
+            <input type="number" id="numero" name="numero" required>
+            
+            <label for="operacao">Operação:</label>
+            <select id="operacao" name="operacao" required>
+                <option value="" selected></option>
+                {% for op in operacoes %}
+                <option value="{{op}}">{{op}}</option>
+                {% endfor %}
+            </select>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn btn-cadastrar">Cadastrar</button>
+                <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

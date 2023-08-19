@@ -28,16 +28,27 @@ body {
 
 .header h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .header p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 8px;
 }
 
 /* Botão de registro */
 .btn-registrar {
+    float: right;
+    margin-top: 10px;
+    background-color: #5b9bd5;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.btn-torre {
     float: right;
     margin-top: -40px;
     background-color: #5b9bd5;
@@ -59,6 +70,11 @@ table th, table td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
+}
+
+th {
+    background-color: #5b9bd5;
+    color: #fff;
 }
 
 /* Cores */
@@ -96,4 +112,5 @@ table th, table td {
 h2 {
     text-align: center;
     margin: 40px;
+    font-size: 40px;
 }

@@ -1,4 +1,4 @@
-from troca_turno.models import MobyUser, Passagem
+from troca_turno.models import MobyUser, Passagem, Torre, Operacao
 
 from django.contrib.auth import authenticate, login
 
@@ -52,7 +52,39 @@ class PassagemService:
     
     @staticmethod
     def op_filter(operacao):
-        passagens = Passagem.objects.using(DATABASE).all().filter(operacao=operacao)
+        passagens = Passagem.objects.using(DATABASE).all().filter(torre__operacao=operacao)
         return passagens
+    
+
+class TorreService:
+
+    @staticmethod
+    def query_all():
+        torres = Torre.objects.using(DATABASE).all()
+        return torres
+    
+    @staticmethod
+    def create(numero, operacao):
+        torre = Torre.objects.using(DATABASE).filter(numero=numero).filter(operacao=operacao).first()
+
+        if torre:
+            return False
+
+        else:
+            Torre.objects.create(numero=numero, operacao=operacao).save()
+            return True
+        
+
+class OperacaoService:
+
+    @staticmethod
+    def query_all():
+        operacoes = Operacao.objects.using(DATABASE).all()
+        return operacoes
+    
+    @staticmethod
+    def get(nome):
+        operacao = Operacao.objects.using(DATABASE).get(nome=nome)
+        return operacao
         
 

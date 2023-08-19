@@ -15,8 +15,8 @@
             <h1>Bem-vindo, {{ user.username }}</h1>
             <p class="small">Email: {{ user.email }}</p>
         </div>
+        <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Adicionar Torre</a>
         <a href="" class="btn btn-registrar">Registrar Passagem</a>
-        <a href="" class="btn btn-registrar">+ Adicionar Torre</a>
         <h2 class="titulo">Passagens</h2>
         <table>
             <thead>

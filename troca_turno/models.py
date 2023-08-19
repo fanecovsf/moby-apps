@@ -50,7 +50,7 @@ class Torre(models.Model):
     operacao = models.ForeignKey(Operacao, related_name='operacoesTorre', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return f'Torre {self.numero}'
+        return f'Torre {self.numero} - {self.operacao}'
 
 
 class Passagem(models.Model):

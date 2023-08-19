@@ -1,4 +1,4 @@
-from troca_turno.models import MobyUser
+from troca_turno.models import MobyUser, Passagem
 
 from django.contrib.auth import authenticate, login
 
@@ -41,5 +41,18 @@ class MobyUserService:
         
         else:
             return False
+        
+
+class PassagemService:
+    
+    @staticmethod
+    def query_all():
+        passagens = Passagem.objects.using(DATABASE).all()
+        return passagens
+    
+    @staticmethod
+    def op_filter(operacao):
+        passagens = Passagem.objects.using(DATABASE).all().filter(operacao=operacao)
+        return passagens
         
 

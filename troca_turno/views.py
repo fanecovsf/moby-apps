@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from troca_turno.services import MobyUserService
+from troca_turno.services import MobyUserService, PassagemService
 
 class Views:
 
@@ -15,10 +15,10 @@ class Views:
             login = MobyUserService.aut(request, email, senha)
 
             if login:
-                return HttpResponse('Logado')
+                return redirect('painel-principal')
             
             else:
-                return HttpResponse('Usuário não existente')
+                render(request, 'login.html')
 
         return render(request, 'login.html')
 

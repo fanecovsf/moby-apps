@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User, BaseUserManager
 
+from datetime import datetime
+
 
 class Operacao(models.Model):
     nome = models.CharField(max_length=255, unique=True)
@@ -56,19 +58,21 @@ class Torre(models.Model):
 class Passagem(models.Model):
     titulo = models.CharField(max_length=60)
     descricao = models.CharField(max_length=5000)
+    criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    finalizado_em = models.DateTimeField(null=True, blank=True)
 
     torre = models.OneToOneField(
         Torre,
         on_delete=models.DO_NOTHING
     )
 
-    responsavel = models.OneToOneField(
+    responsavel = models.ForeignKey(
         MobyUser,
         related_name='passagem_responsavel',
         on_delete=models.DO_NOTHING
     )
 
-    receptor = models.OneToOneField(
+    receptor = models.ForeignKey(
         MobyUser,
         related_name='passagem_receptor',
         on_delete=models.DO_NOTHING

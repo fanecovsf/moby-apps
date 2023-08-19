@@ -22,28 +22,35 @@
             <thead>
                 <tr>
                     <th>Título</th>
-                    <th>Descrição</th>
+                    <th>Criado em</th>
                     <th>Torre</th>
                     <th>Responsável</th>
                     <th>Receptor</th>
-                    <th>Concluido</th>
+                    <th>Status</th>
+                    <th>Concluído em</th>
                 </tr>
             </thead>
             <tbody>
                 {% for passagem in passagens %}
                 <tr>
                     <td>{{ passagem.titulo }}</td>
-                    <td>{{ passagem.descricao }}</td>
+                    <td>{{ passagem.criado_em|date:"d/m/Y H:i:s" }}</td>
                     <td>{{ passagem.torre.numero }}</td>
                     <td>{{ passagem.responsavel.username }}</td>
                     <td>{{ passagem.receptor.username }}</td>
                     <td>
-                        {% if passagem.concluido %}
+                        {% if passagem.concluida %}
                             Concluído
                         {% else %}
                             Pendente
                         {% endif %}
                     </td>
+                    <td>{{ passagem.finalizado_em|date:"d/m/Y H:i:s"|default:"" }}</td>
+                    {% if not passagem.concluido %}
+                    <td class="edit-td">
+                    <a class="edit" href="">Editar</a>
+                    </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

@@ -48,6 +48,22 @@ body {
     text-decoration: none;
 }
 
+.edit-td {
+    justify-content: center;
+    text-align: center;
+}
+
+.edit {
+    text-align: center;
+    margin-top: 10px;
+    background-color: #5b9bd5;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
 .btn-torre {
     float: right;
     margin-top: -40px;
@@ -70,6 +86,13 @@ table th, table td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+table td {
+    max-width: 200px; /* Defina o valor máximo que você achar apropriado */
 }
 
 th {

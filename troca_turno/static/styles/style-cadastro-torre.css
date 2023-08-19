@@ -6,6 +6,14 @@ body {
     background: #5b9bd5;
 }
 
+.numero {
+    max-width: 150px;
+}
+
+.operacao {
+    max-width: 180px;
+}
+
 .container {
     max-width: 400px;
     margin: auto;
@@ -71,7 +79,7 @@ form select {
 }
 
 .btn-cancelar {
-    background-color: #ccc;
+    background-color: #ba3b3b;
     color: #fff;
 }
 

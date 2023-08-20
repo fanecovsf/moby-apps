@@ -53,4 +53,15 @@ class Views:
         return render(request, 'cadastro-torre.html', context={
             'operacoes': operacoes
         })
+    
+
+    @login_required(login_url='/troca-turno/login/')
+    def registro_passagem(request):
+        torres = TorreService.query_all()
+        usuarios = MobyUserService.query_all()
+
+        if request.method == 'POST':
+            titulo = request.POST.get('titulo')
+            descricao = request.POST.get('descricao')
+            torre = TorreService
 

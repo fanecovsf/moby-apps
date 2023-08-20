@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'styles/style-registro.css' %}" rel="stylesheet" />
+    <title>Registrar Passagem</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registrar Passagem</h1>
+        </div>
+        <form action="{% url 'registro-passagem' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+            
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" rows="10" required></textarea>
+            
+            <label for="torre">Torre:</label>
+            <select id="torre" name="torre" required>
+                {% for t in torres %}
+                <option value="{{t}}">{{t}}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="responsavel">Responsável:</label>
+            <select id="responsavel" name="responsavel" required>
+                {% for u in usuarios %}
+                <option value="{{u}}">{{u}}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="receptor">Receptor:</label>
+            <select id="receptor" name="receptor" required>
+                {% for u in usuarios %}
+                <option value="{{u}}">{{u}}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="anexo">Anexo:</label>
+            <input type="file" id="anexo" name="anexos" multiple>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn btn-registrar">Registrar</button>
+                <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

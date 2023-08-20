@@ -1,7 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User, BaseUserManager
-
-from datetime import datetime
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 class Operacao(models.Model):
@@ -78,9 +76,12 @@ class Passagem(models.Model):
         on_delete=models.DO_NOTHING
     )
 
-    anexo = models.FileField(upload_to='attachments/', null=True, blank=True)
     concluida = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.titulo
 
+
+class Anexo(models.Model):
+    passagem = models.ForeignKey(Passagem, on_delete=models.DO_NOTHING)
+    arquivo = models.FileField(upload_to='attachments/', null=True, blank=True)

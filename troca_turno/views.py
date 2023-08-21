@@ -8,6 +8,8 @@ class Views:
 
     @staticmethod
     def login_app(request):
+        login_fail = False
+
         if request.method == 'POST':
             email = request.POST.get('email')
             senha = request.POST.get('senha')
@@ -18,9 +20,14 @@ class Views:
                 return redirect('painel-principal')
             
             else:
-                return render(request, 'login.html')
+                login_fail = True
+                return render(request, 'login.html', context={
+                    'login_fail': login_fail,
+                })
 
-        return render(request, 'login.html')
+        return render(request, 'login.html', context={
+            'login_fail': login_fail
+        })
 
 
     @login_required(login_url='/troca-turno/login/')

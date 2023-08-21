@@ -13,11 +13,16 @@
 <body>
   <div class="tela-login">
     <h1>LOGIN</h1>
+    {% if login_fail %}
+    <div class="popup" id="popup">
+      <p>Email ou senha incorretos</p>
+    </div>
+    {% endif %}
     <form action="" method="POST">
       {% csrf_token %}
       <input type="email" id="login" name="email" placeholder="Email"><br><br>
       <input type="password" id="senha" name="senha" placeholder="Senha"><br><br>
-      <button type="submit" class="enviar">ENTRAR</button><br><br>
+      <button type="submit" class="enviar">Login</button><br><br>
     </form>
   </div>
 

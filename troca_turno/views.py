@@ -5,6 +5,8 @@ from django.core.files import File
 
 from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, AnexoService
 
+import datetime
+
 class Views:
 
     @staticmethod
@@ -42,6 +44,12 @@ class Views:
         passagens = PassagemService.op_filter(request)
         torres = TorreService.query_for_user(request)
         usuarios = MobyUserService.op_filter(request)
+
+        data_final = datetime.date.today()
+        data_inicial = data_final - datetime.timedelta(days=2)
+
+        filtro_inicial = str(data_inicial) + " 00:00:00"
+        filtro_final = str(data_final) + " 23:59:59"
 
         if request.method == 'POST':
             data_inicio = request.POST.get('data-inicio')
@@ -84,23 +92,25 @@ class Views:
                 'usuarios': usuarios
             })
 
-            
+        if request.method == 'GET':
+            passagens = passagens.filter(criado_em__range=(filtro_inicial, filtro_final))
 
-        return render(request, 'painel.html', context={
-            'user':user,
-            'passagens':passagens,
-            'torres': torres,
-            'usuarios': usuarios
-        })
+            return render(request, 'painel.html', context={
+                'user':user,
+                'passagens':passagens,
+                'torres': torres,
+                'usuarios': usuarios,
+                'data_inicial': str(data_inicial),
+                'data_final': str(data_final)
+            })
     
 
     @login_required(login_url='/troca-turno/login/')
     def cadastro_torre(request):
-        operacoes = OperacaoService.query_all()
+        operacao = request.user.operacao
 
         if request.method == 'POST':
             numero = request.POST.get('numero')
-            operacao = OperacaoService.get(request.POST.get('operacao'))
 
             torre_create = TorreService.create(numero, operacao)
 
@@ -111,7 +121,7 @@ class Views:
                 return HttpResponse('Torre já existente, tente novamente!')
             
         return render(request, 'cadastro-torre.html', context={
-            'operacoes': operacoes
+            'operacao': operacao
         })
     
 
@@ -156,5 +166,49 @@ class Views:
             'torres':torres,
             'usuarios':usuarios
         })
+    
+
+    @login_required(login_url='/troca-turno/login/')
+    def edit_passagem(request, id):
+        passagem = PassagemService.get(id)
+        usuarios = MobyUserService.op_filter(request)
+
+        if request.method == 'POST':
+
+            acao = request.POST.get('acao')
+
+            if acao == 'salvar':
+                titulo = request.POST.get('titulo')
+                descricao = request.POST.get('descricao')
+                receptor = MobyUserService.get_email(request.POST.get('receptor'))
+
+                anexos = request.FILES.getlist('anexos')
+                if anexos:
+                    for anexo in anexos:
+                        anexo_save = AnexoService.create(passagem=passagem)
+                        anexo_save.arquivo.save(anexo.name, File(anexo))
+
+                passagem.titulo = titulo
+                passagem.descricao = descricao
+                passagem.receptor = receptor
+                passagem.save()
+
+                return redirect('painel-principal')
+            
+            if acao == 'finalizar':
+                now = datetime.datetime.now()
+                passagem.concluida = True
+                passagem.finalizado_em = now
+
+                passagem.save()
+
+                return redirect('painel-principal')
+
+        return render(request, 'edit-passagem.html', context={
+            'passagem':passagem,
+            'usuarios':usuarios
+        })
+
+
 
 

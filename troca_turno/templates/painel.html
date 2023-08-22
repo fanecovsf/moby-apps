@@ -26,12 +26,12 @@
 
                     <div class="filter-group">
                         <label for="data_inicio" class="data-filter">Data de criação inicial:</label>
-                        <input type="date" id="data_inicio" name="data-inicio">
+                        <input type="date" id="data_inicio" name="data-inicio" value="{{ data_inicial }}">
                     </div>
                     
                     <div class="filter-group">
                         <label for="data_fim" class="data-filter">Data de criação final:</label>
-                        <input type="date" id="data_fim" name="data-fim">
+                        <input type="date" id="data_fim" name="data-fim" value="{{ data_final }}">
                     </div>
 
                 <div class="filter-group">
@@ -109,13 +109,13 @@
                         {% endif %}
                     </td>
                     <td>{{ passagem.finalizado_em|date:"d/m/Y H:i:s"|default:"" }}</td>
-                    {% if not passagem.concluida %}
+                    {% if not passagem.concluida and passagem.responsavel == user %}
                     <td class="edit-td">
-                        <a class="edit" href="">Editar</a>
+                        <a class="edit" href="/troca-turno/painel/{{ passagem.id }}">Editar</a>
                     </td>
                     {% else %}
                     <td class="edit-td">
-                        <a class="edit disabled-link" href="">Passagem concluída</a>
+                        <a class="edit view-only" href="">Visualizar</a>
                     </td>
                     {% endif %}
                 </tr>

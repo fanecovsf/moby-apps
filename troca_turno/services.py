@@ -56,6 +56,11 @@ class PassagemService:
         return Passagem.objects.using(DATABASE)
     
     @staticmethod
+    def get(id):
+        passagem = Passagem.objects.using(DATABASE).get(id=id)
+        return passagem
+    
+    @staticmethod
     def query_all():
         passagens = Passagem.objects.using(DATABASE).all()
         return passagens

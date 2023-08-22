@@ -20,10 +20,7 @@
             
             <label for="operacao" >Operação:</label>
             <select id="operacao" name="operacao" class="operacao" required>
-                <option value="" selected></option>
-                {% for op in operacoes %}
-                <option value="{{op}}">{{op}}</option>
-                {% endfor %}
+                <option value="{{ operacao }}" disabled selected>{{ operacao }}</option>
             </select>
             
             <div class="btn-group">        

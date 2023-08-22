@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'styles/style-edit.css' %}" rel="stylesheet" />
+    <title>Editar Passagem</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Editar Passagem</h1>
+        </div>
+        <form action="{% url 'edit-passagem' passagem.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" value="{{ passagem.titulo }}" disabled required>
+            
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" rows="10" disabled required>{{ passagem.descricao }}</textarea>
+            
+            <label for="responsavel">Responsável:</label>
+            <input type="text" id="responsavel" name="responsavel" value="{{ passagem.responsavel.username }}" disabled>
+            
+            <label for="receptor">Receptor:</label>
+            <select id="receptor" name="receptor" disabled required>
+                {% for u in usuarios %}
+                    <option value="{{u.email}}" {% if u.email == passagem.receptor.email %}selected{% endif %}>{{u.username}}</option>
+                {% endfor %}
+            </select>
+            
+            <label>Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
+            
+            <label for="anexo">Anexos:</label>
+            {% if passagem.anexos.all %}
+                <ul>
+                    {% for anexo in passagem.anexos.all %}
+                        <li><a href="{{ anexo.arquivo.url }}" target="_blank">{{ anexo.arquivo.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum anexo disponível.</p>
+            {% endif %}
+            
+            <div class="btn-group">
+                <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Voltar</a>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

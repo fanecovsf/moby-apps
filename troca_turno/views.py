@@ -208,6 +208,15 @@ class Views:
             'passagem':passagem,
             'usuarios':usuarios
         })
+    
+    
+    @login_required(login_url='/troca-turno/login/')
+    def view_passagem(request, id):
+        passagem = PassagemService.get(id)
+
+        return render(request, 'view-passagem.html', context={
+            'passagem':passagem
+        })
 
 
 

@@ -1,6 +1,7 @@
 from troca_turno.models import MobyUser, Passagem, Torre, Operacao
 
 from django.contrib.auth import authenticate, login
+from django.db import IntegrityError
 
 
 DATABASE = 'default'
@@ -55,6 +56,22 @@ class PassagemService:
         passagens = Passagem.objects.using(DATABASE).all().filter(torre__operacao=operacao)
         return passagens
     
+    @staticmethod
+    def create(titulo, descricao, torre, responsavel, receptor):
+        try:
+            passagem = Passagem.objects.create(
+                titulo=titulo,
+                descricao=descricao,
+                torre=torre,
+                responsavel=responsavel,
+                receptor=receptor
+            )
+
+            return passagem
+        
+        except IntegrityError as e:
+            return e
+    
 
 class TorreService:
 
@@ -73,6 +90,20 @@ class TorreService:
         else:
             Torre.objects.create(numero=numero, operacao=operacao).save()
             return True
+        
+    @staticmethod
+    def get(numero, operacao):
+        torre = Torre.objects.using(DATABASE).filter(numero=numero).filter(operacao=operacao).first()
+        if torre:
+            return torre
+        
+        else:
+            return None
+        
+    @staticmethod
+    def query_for_user(request):
+        torres = Torre.objects.using(DATABASE).filter(operacao=request.user.operacao).all()
+        return torres
         
 
 class OperacaoService:

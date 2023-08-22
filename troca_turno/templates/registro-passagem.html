@@ -24,21 +24,17 @@
             <label for="torre">Torre:</label>
             <select id="torre" name="torre" required>
                 {% for t in torres %}
-                <option value="{{t}}">{{t}}</option>
+                <option value="{{t.numero}}">{{t}}</option>
                 {% endfor %}
             </select>
             
             <label for="responsavel">Responsável:</label>
-            <select id="responsavel" name="responsavel" required>
-                {% for u in usuarios %}
-                <option value="{{u}}">{{u}}</option>
-                {% endfor %}
-            </select>
+            <input type="text" id="responsavel" name="responsavel" value="{{ user.username }}" disabled>
             
             <label for="receptor">Receptor:</label>
             <select id="receptor" name="receptor" required>
                 {% for u in usuarios %}
-                <option value="{{u}}">{{u}}</option>
+                <option value="{{u.email}}">{{u.username}}</option>
                 {% endfor %}
             </select>
             

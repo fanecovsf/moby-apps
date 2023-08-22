@@ -64,11 +64,39 @@ class Views:
 
     @login_required(login_url='/troca-turno/login/')
     def registro_passagem(request):
-        torres = TorreService.query_all()
+        user = request.user
+
+        torres = TorreService.query_for_user(request)
         usuarios = MobyUserService.query_all()
 
         if request.method == 'POST':
-            titulo = request.POST.get('titulo')
-            descricao = request.POST.get('descricao')
-            torre = TorreService
+            try:
+                titulo = request.POST.get('titulo')
+                descricao = request.POST.get('descricao')
+                torre = TorreService.get(request.POST.get('torre'), user.operacao)
+                receptor = MobyUserService.get_email(request.POST.get('receptor'))
+                passagem = PassagemService.create(
+                    titulo=titulo,
+                    descricao=descricao,
+                    torre=torre,
+                    responsavel=user,
+                    receptor=receptor
+                )
+
+                print(passagem)
+
+                if passagem:
+                    return redirect('painel-principal')
+
+                else:
+                    return HttpResponse({'error':'Erro ao criar a passagem'})
+
+            except Exception as e:
+                return HttpResponse(e)
+
+        return render(request, 'registro-passagem.html', context={
+            'torres':torres,
+            'usuarios':usuarios
+        })
+
 

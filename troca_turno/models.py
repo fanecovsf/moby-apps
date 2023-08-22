@@ -41,7 +41,7 @@ class MobyUser(AbstractUser):
     objects = MobyUserManager()
 
     def __str__(self) -> str:
-        return self.username
+        return self.email
 
 
 class Torre(models.Model):
@@ -50,7 +50,7 @@ class Torre(models.Model):
     operacao = models.ForeignKey(Operacao, related_name='operacoesTorre', on_delete=models.PROTECT)
 
     def __str__(self) -> str:
-        return f'Torre {self.numero} - {self.operacao}'
+        return str(self.numero)
 
 
 class Passagem(models.Model):
@@ -59,8 +59,9 @@ class Passagem(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     finalizado_em = models.DateTimeField(null=True, blank=True)
 
-    torre = models.OneToOneField(
+    torre = models.ForeignKey(
         Torre,
+        related_name='passagem_torre',
         on_delete=models.DO_NOTHING
     )
 

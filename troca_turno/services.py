@@ -63,7 +63,7 @@ class PassagemService:
     @staticmethod
     def op_filter(request):
         operacao = request.user.operacao
-        passagens = Passagem.objects.using(DATABASE).all().filter(torre__operacao=operacao)
+        passagens = Passagem.objects.using(DATABASE).all().order_by('concluida').filter(torre__operacao=operacao)
         return passagens
     
     @staticmethod
@@ -95,7 +95,7 @@ class TorreService:
         torre = Torre.objects.using(DATABASE).filter(numero=numero).filter(operacao=operacao).first()
 
         if torre:
-            return torre
+            return False
 
         else:
             Torre.objects.using(DATABASE).create(numero=numero, operacao=operacao).save()

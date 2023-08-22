@@ -1,14 +1,20 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.core.files import File
 
-from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService
+from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, AnexoService
 
 class Views:
 
     @staticmethod
     def login_app(request):
         login_fail = False
+
+        user = request.user
+
+        if user.is_authenticated:
+            return redirect('painel-principal')
 
         if request.method == 'POST':
             email = request.POST.get('email')
@@ -83,9 +89,14 @@ class Views:
                     receptor=receptor
                 )
 
-                print(passagem)
-
                 if passagem:
+                    anexos = request.FILES.getlist('anexos')
+
+                    if anexos:
+                        for anexo in anexos:
+                            anexo_save = AnexoService.create(passagem=passagem)
+                            anexo_save.arquivo.save(anexo.name, File(anexo))
+
                     return redirect('painel-principal')
 
                 else:

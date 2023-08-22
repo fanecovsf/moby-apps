@@ -72,6 +72,10 @@ form select {
 }
 
 .btn-cancelar {
-    background-color: #ccc;
-    color: #ba3b3b
+    background-color: #ba3b3b;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: #333;
 }

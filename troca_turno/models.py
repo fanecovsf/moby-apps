@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+from troca_turno.util.util import Utils
+
 
 class Operacao(models.Model):
     nome = models.CharField(max_length=255, unique=True)
@@ -84,5 +86,5 @@ class Passagem(models.Model):
 
 
 class Anexo(models.Model):
-    passagem = models.ForeignKey(Passagem, on_delete=models.DO_NOTHING)
-    arquivo = models.FileField(upload_to='attachments/', null=True, blank=True)
+    passagem = models.ForeignKey(Passagem, on_delete=models.CASCADE)
+    arquivo = models.FileField(upload_to=Utils.attachment_file_path, null=True, blank=True)

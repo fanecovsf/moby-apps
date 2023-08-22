@@ -1,4 +1,4 @@
-from troca_turno.models import MobyUser, Passagem, Torre, Operacao
+from troca_turno.models import MobyUser, Passagem, Torre, Operacao, Anexo
 
 from django.contrib.auth import authenticate, login
 from django.db import IntegrityError
@@ -59,7 +59,7 @@ class PassagemService:
     @staticmethod
     def create(titulo, descricao, torre, responsavel, receptor):
         try:
-            passagem = Passagem.objects.create(
+            passagem = Passagem.objects.using(DATABASE).create(
                 titulo=titulo,
                 descricao=descricao,
                 torre=torre,
@@ -85,10 +85,10 @@ class TorreService:
         torre = Torre.objects.using(DATABASE).filter(numero=numero).filter(operacao=operacao).first()
 
         if torre:
-            return False
+            return torre
 
         else:
-            Torre.objects.create(numero=numero, operacao=operacao).save()
+            Torre.objects.using(DATABASE).create(numero=numero, operacao=operacao).save()
             return True
         
     @staticmethod
@@ -117,5 +117,22 @@ class OperacaoService:
     def get(nome):
         operacao = Operacao.objects.using(DATABASE).get(nome=nome)
         return operacao
+    
+
+class AnexoService:
+
+    @staticmethod
+    def query_all():
+        anexos = Anexo.objects.using(DATABASE).all()
+        return anexos
+    
+    @staticmethod
+    def create(passagem):
+        anexo = Anexo.objects.using(DATABASE).create(passagem=passagem)
+
+        if anexo:
+            return anexo
         
+        else:
+            return None
 

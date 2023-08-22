@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
+    'home',
     'troca_turno'
 ]
 
@@ -126,4 +127,5 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 5 * 60

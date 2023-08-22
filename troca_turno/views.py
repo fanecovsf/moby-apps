@@ -39,11 +39,58 @@ class Views:
     @login_required(login_url='/troca-turno/login/')
     def painel_principal(request):
         user = request.user
-        passagens = PassagemService.op_filter(user.operacao)
+        passagens = PassagemService.op_filter(request)
+        torres = TorreService.query_for_user(request)
+        usuarios = MobyUserService.op_filter(request)
+
+        if request.method == 'POST':
+            data_inicio = request.POST.get('data-inicio')
+            data_fim = request.POST.get('data-fim')
+            filtro_torre = TorreService.get(request.POST.get('filtro-torre'), request.user.operacao)
+            filtro_resp = MobyUserService.get_email(request.POST.get('filtro-resp'))
+            filtro_recep = MobyUserService.get_email(request.POST.get('filtro-recep'))
+
+            filtro_status = request.POST.get('filtro-status')
+            if filtro_status == 'concluido':
+                filtro_status = True
+
+            elif filtro_status == 'pendente':
+                filtro_status = False
+
+            else:
+                pass
+
+            if data_inicio and data_fim:
+                data_inicio = data_inicio + " 00:00:00"
+                data_fim = data_fim + " 23:59:59"
+                passagens = passagens.filter(criado_em__range=(data_inicio,data_fim))
+
+            if filtro_torre:
+                passagens = passagens.filter(torre=filtro_torre)
+
+            if filtro_resp:
+                passagens = passagens.filter(responsavel=filtro_resp)
+
+            if filtro_recep:
+                passagens = passagens.filter(receptor=filtro_recep)
+
+            if filtro_status==True or filtro_status==False:
+                passagens = passagens.filter(concluida=filtro_status)
+
+            return render(request, 'painel.html', context={
+                'user':user,
+                'passagens':passagens,
+                'torres': torres,
+                'usuarios': usuarios
+            })
+
+            
 
         return render(request, 'painel.html', context={
             'user':user,
-            'passagens':passagens
+            'passagens':passagens,
+            'torres': torres,
+            'usuarios': usuarios
         })
     
 

@@ -17,6 +17,10 @@ body {
     margin-top: 10px;
 }
 
+.data-filter {
+    justify-content: left;
+}
+
 /* Cabeçalho */
 .header {
     background-color: #ffc000;
@@ -46,6 +50,7 @@ body {
     padding: 8px 15px;
     border-radius: 4px;
     text-decoration: none;
+    font-size: large;
 }
 
 .edit-td {
@@ -62,6 +67,7 @@ body {
     padding: 8px 15px;
     border-radius: 4px;
     text-decoration: none;
+    font-size: large;
 }
 
 .btn-torre {
@@ -73,6 +79,7 @@ body {
     padding: 8px 15px;
     border-radius: 4px;
     text-decoration: none;
+    font-size: large;
 }
 
 /* Tabela */
@@ -137,3 +144,76 @@ h2 {
     margin: 40px;
     font-size: 40px;
 }
+
+.filtro-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.top-filters {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.bottom-filters {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+}
+
+.filter-group {
+    width: calc(25% - 10px); /* Distribuição igual em 4 colunas com espaços */
+    margin-right: 10px;
+}
+
+.filtro-form label {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.filtro-form select,
+.filtro-form input[type="date"] {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 3px;
+}
+
+.filtro-form button[type="submit"] {
+    background-color: #5b9bd5;
+    font-size: large;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-left: 120px;
+    cursor: pointer;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    width: 10%;
+    height: fit-content;
+    margin-right: 20px;
+}
+
+.filtro-form button:hover {
+    background-color: #333;
+}
+
+a:hover {
+    background-color: #333;
+}
+
+.disabled-link {
+    color: #ccc;
+    font-size: small;
+    background-color: #fff;
+    pointer-events: none; 
+    cursor: default; 
+    text-decoration: none;
+}
+

@@ -43,8 +43,17 @@ class MobyUserService:
         else:
             return False
         
+    @staticmethod
+    def op_filter(request):
+        usuarios = MobyUser.objects.using(DATABASE).filter(operacao=request.user.operacao).all()
+        return usuarios
+        
 
 class PassagemService:
+
+    @staticmethod
+    def generic():
+        return Passagem.objects.using(DATABASE)
     
     @staticmethod
     def query_all():
@@ -52,7 +61,8 @@ class PassagemService:
         return passagens
     
     @staticmethod
-    def op_filter(operacao):
+    def op_filter(request):
+        operacao = request.user.operacao
         passagens = Passagem.objects.using(DATABASE).all().filter(torre__operacao=operacao)
         return passagens
     
@@ -93,12 +103,12 @@ class TorreService:
         
     @staticmethod
     def get(numero, operacao):
-        torre = Torre.objects.using(DATABASE).filter(numero=numero).filter(operacao=operacao).first()
-        if torre:
-            return torre
-        
-        else:
-            return None
+        try:
+            torre = Torre.objects.using(DATABASE).filter(numero=numero).filter(operacao=operacao).first()
+        except:
+            torre = None
+
+        return torre
         
     @staticmethod
     def query_for_user(request):

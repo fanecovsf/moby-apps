@@ -108,11 +108,15 @@ body {
     margin: 10px;
     box-shadow: 2px 0px 10px rgba(255, 255, 255, 0.445);
     align-items: center;
+    width: 280px;
+    height: 330px;
+    overflow: auto;
 }
 
 .card h3 { /* Adicionado para centralizar o título */
     text-align: center;
     margin: 0; /* Removido a margem para melhor alinhamento */
+    margin-bottom: 15px;
 }
 
 .card-body p {
@@ -120,7 +124,7 @@ body {
     margin-left: 10px;
 }
 
-.card-footer a.edit, a.view-only, .card-footer {
+a.edit {
     background-color: #ffc000;
     padding: 5px 10px;
     border-radius: 25px;
@@ -131,9 +135,20 @@ body {
     justify-items: end;
 }
 
+a.view-only {
+    background-color: #4073b2;
+    padding: 5px 10px;
+    border-radius: 25px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    justify-items: end;
+}
+
 .card-footer a.edit:hover, .card-footer a.view-only:hover {
-    transform: scale(1.1);
-    color: #000000;
+    background-color: #13263d;
+    color: #fff;
 }
 
 /* Responsividade */
@@ -149,5 +164,32 @@ body {
     .card {
         width: 100%;
     }
+}
+
+.icon {
+    height: 30px; /* Ajuste a altura conforme necessário */
+    width: 30px;  /* Ajuste a largura conforme necessário */
+    margin-right: 5px;
+}
+
+.card-line {
+    border-bottom: 1px solid #ccc; /* Ajuste a cor e espessura conforme necessário */
+    margin: 5px 0; /* Ajuste as margens conforme necessário */
+    margin-bottom: 5px;
+}
+
+.btn-container {
+    margin: 20px;
+}
+
+.btn-torre {
+    margin-right: 40px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    margin-top: auto;       
 }
 

@@ -88,16 +88,16 @@
             <div class="card">
                 <div class="card-header">
                     <h3>{{ passagem.titulo }}</h3>
-                    <p>Criado em: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</p>
+                    <p class="card-line">Criado em: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</p>
                     {% if passagem.concluida %}
                     <img src="{% static 'images/verificar.png' %}" alt="Verificado" class="verificar-img">
                     {% endif %}
                 </div>
                 <div class="card-body">
-                    <p>Torre: {{ passagem.torre.numero }}</p>
-                    <p>Responsável: {{ passagem.responsavel.username }}</p>
-                    <p>Receptor: {{ passagem.receptor.username }}</p>
-                    <p>Status: 
+                    <p class="card-line"><img src="{% static 'images/torres.png' %}" alt="Torre" class="icon"> Torre: {{ passagem.torre.numero }}</p>
+                    <p class="card-line"><img src="{% static 'images/responsavel.png' %}" alt="Responsável" class="icon"> Responsável: {{ passagem.responsavel.username }}</p>
+                    <p class="card-line"><img src="{% static 'images/receptor.png' %}" alt="Receptor" class="icon"> Receptor: {{ passagem.receptor.username }}</p>
+                    <p class="card-line"><img src="{% static 'images/status.png' %}" alt="Status" class="icon"> Status: 
                         {% if passagem.concluida %}
                             Concluído
                         {% else %}

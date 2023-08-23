@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="{% static 'styles/style.css' %}" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="{% static 'icon/icon.ico' %}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <title>Login</title>
 </head>
 <body>
@@ -15,9 +17,22 @@
     <img src="{% static 'images/logo.png' %}" alt="logo" class="logo">
     <h1>LOGIN</h1>
     {% if login_fail %}
-    <div class="popup" id="popup">
-      <p>Email ou senha incorretos, tente novamente.</p>
-    </div>
+    <script>
+      Toastify({
+        text: "Email ou senha incorretos, tente novamente.",
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#FF0000",  // Cor de fundo vermelha
+        stopOnFocus: true,
+        style: {
+          fontSize: "14px",  // Tamanho de fonte menor
+          height: "auto",    // Ajusta automaticamente a altura
+          width: "250px",    // Largura fixa do pop-up
+          borderRadius: "10px"  // Cantos arredondados
+        }
+        }).showToast();
+    </script>
     {% endif %}
     <form action="" method="POST">
       {% csrf_token %}
@@ -26,5 +41,7 @@
       <button type="submit" class="enviar">Login</button><br><br>
     </form>
   </div>
+
 </body>
+
 </html>

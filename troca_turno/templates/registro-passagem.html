@@ -16,10 +16,10 @@
         <form action="{% url 'registro-passagem' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" required>
+            <input type="text" id="titulo" name="titulo" maxlength="60" required>
             
             <label for="descricao">Descrição:</label>
-            <textarea id="descricao" name="descricao" rows="10" required></textarea>
+            <textarea id="descricao" name="descricao" rows="10" class="in-desc" maxlength="5000" required></textarea>
             
             <label for="torre">Torre:</label>
             <select id="torre" name="torre" required>

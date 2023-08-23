@@ -86,5 +86,5 @@ class Passagem(models.Model):
 
 
 class Anexo(models.Model):
-    passagem = models.ForeignKey(Passagem, on_delete=models.CASCADE)
+    passagem = models.ForeignKey(Passagem, on_delete=models.CASCADE, related_name='anexos')
     arquivo = models.FileField(upload_to=Utils.attachment_file_path, null=True, blank=True)

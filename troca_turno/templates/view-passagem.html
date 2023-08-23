@@ -19,7 +19,7 @@
             <input type="text" id="titulo" name="titulo" value="{{ passagem.titulo }}" disabled required>
             
             <label for="descricao">Descrição:</label>
-            <textarea id="descricao" name="descricao" rows="10" disabled required>{{ passagem.descricao }}</textarea>
+            <textarea id="descricao" name="descricao" rows="10" class="in-desc" disabled required>{{ passagem.descricao }}</textarea>
             
             <label for="responsavel">Responsável:</label>
             <input type="text" id="responsavel" name="responsavel" value="{{ passagem.responsavel.username }}" disabled>

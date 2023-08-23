@@ -1,219 +1,153 @@
-/* Estilo geral */
 body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    background: #5b9bd5;
+    background: #13263d;
+    color: #fff;
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #254266;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    justify-content: center;
     margin-top: 10px;
 }
 
-.data-filter {
-    justify-content: left;
+.card-header {
+    position: relative;
 }
 
-/* Cabeçalho */
-.header {
+.verificar-img {
+    position: absolute;
+    top: 0px;
+    right: -20px;
+    width: 25px; /* Ajuste o tamanho conforme necessário */
+    height: 25px;
+}
+
+/* Botões */
+.btn, .btn-pesquisa {
     background-color: #ffc000;
-    padding: 10px;
-    color: #fff;
-    text-align: center;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #13263d;
+    font-size: large;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-pesquisa {
+    margin-left: 100px;
     margin-bottom: 20px;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 16px;
-}
-
-.header p {
-    margin: 5px 0;
-    font-size: 8px;
-}
-
-/* Botão de registro */
-.btn-registrar {
-    float: right;
-    margin-top: 10px;
-    background-color: #5b9bd5;
+.btn:hover, .btn-pesquisa:hover {
+    background-color: #13263d;
     color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: large;
+    transform: scale(1.1);
 }
 
-.edit-td {
-    justify-content: center;
-    text-align: center;
-}
-
-.edit {
-    text-align: center;
-    margin-top: 10px;
-    background-color: #5b9bd5;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: large;
-}
-
-.btn-torre {
-    float: right;
-    margin-top: -40px;
-    background-color: #5b9bd5;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: large;
-}
-
-/* Tabela */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-}
-
-table td {
-    max-width: 200px; /* Defina o valor máximo que você achar apropriado */
-}
-
-th {
-    background-color: #5b9bd5;
-    color: #fff;
-}
-
-/* Cores */
-.btn-primary {
-    background-color: #5b9bd5;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    table th, table td {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .btn-registrar {
-        float: none;
-        margin-top: 10px;
-    }
-    
-    .user-info h1 {
-        font-size: 20px;
-    }
-    
-    .user-info .small {
-        font-size: 12px;
-    }
-}
-
-h2 {
-    text-align: center;
-    margin: 40px;
-    font-size: 40px;
-}
-
+/* Filtros */
 .filtro-form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; /* Alinhar à esquerda */
     margin-bottom: 20px;
+    width: 100%;
 }
 
-.top-filters {
+.filters {
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    align-items: flex-start; /* Alinhar à esquerda */
+    width: 100%;
+}
+
+.top-filters, .bottom-filters {
+    display: flex;
+    justify-content: flex-start; /* Alinhar à esquerda */
     width: 100%;
     margin-bottom: 10px;
 }
 
-.bottom-filters {
-    display: flex;
-    width: 100%;
-    justify-content: left;
-}
-
 .filter-group {
-    width: calc(25% - 10px); /* Distribuição igual em 4 colunas com espaços */
-    margin-right: 10px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
 }
 
-.filtro-form label {
-    font-weight: bold;
-    margin-bottom: 3px;
-}
-
-.filtro-form select,
-.filtro-form input[type="date"] {
-    width: 100%;
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 3px;
-}
-
-.filtro-form button[type="submit"] {
-    background-color: #5b9bd5;
-    font-size: large;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    margin-left: 120px;
-    cursor: pointer;
-    padding: 8px 15px;
-    box-sizing: border-box;
-    width: 10%;
-    height: fit-content;
-    margin-right: 20px;
-}
-
-.filtro-form button:hover {
-    background-color: #333;
-}
-
-a:hover {
-    background-color: #333;
-}
-
-.disabled-link {
-    color: #ccc;
-    font-size: small;
+.filter-group input, .filter-group select {
+    color: #13263d;
     background-color: #fff;
-    pointer-events: none; 
-    cursor: default; 
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+/* Cartões */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: #13263d;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 2px 0px 10px rgba(255, 255, 255, 0.445);
+    align-items: center;
+}
+
+.card h3 { /* Adicionado para centralizar o título */
+    text-align: center;
+    margin: 0; /* Removido a margem para melhor alinhamento */
+}
+
+.card-body p {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.card-footer a.edit, a.view-only, .card-footer {
+    background-color: #ffc000;
+    padding: 5px 10px;
+    border-radius: 25px;
+    color: #13263d;
     text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    justify-items: end;
+}
+
+.card-footer a.edit:hover, .card-footer a.view-only:hover {
+    transform: scale(1.1);
+    color: #000000;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .top-filters, .bottom-filters {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+    }
 }
 

@@ -9,21 +9,22 @@
     <title>Passagens</title>
 </head>
 <body>
-    <div class="container table-container">
+    <div class="container">
         <div class="user-info">
             <h1>Bem-vindo, {{ user.username }}</h1>
             <p class="small">Email: {{ user.email }}</p>
             <p class="small">Sua operação: {{ user.operacao }}</p>
         </div>
-        <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Adicionar Torre</a>
-        <a href="{% url 'registro-passagem' %}" class="btn btn-registrar">Registrar Passagem</a>
+        <div class="btn-container">
+            <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Adicionar Torre</a>
+            <a href="{% url 'registro-passagem' %}" class="btn btn-registrar">Registrar Passagem</a>
+        </div>
         <h2 class="titulo">Passagens</h2>
-
+        
         <form method="post" class="filtro-form">
             {% csrf_token %}
-            <div class="top-filters">
-                
-
+            <div class="filters">
+                <div class="top-filters">
                     <div class="filter-group">
                         <label for="data_inicio" class="data-filter">Data de criação inicial:</label>
                         <input type="date" id="data_inicio" name="data-inicio" value="{{ data_inicial }}">
@@ -33,97 +34,90 @@
                         <label for="data_fim" class="data-filter">Data de criação final:</label>
                         <input type="date" id="data_fim" name="data-fim" value="{{ data_final }}">
                     </div>
-
-                <div class="filter-group">
-                    <label for="filtro_torre">Torre:</label>
-                    <select id="filtro-torre" name="filtro-torre">
-                        <option value="">Todas</option>
-                        {% for torre in torres %}
-                            <option value="{{ torre }}">{{ torre }}</option>
-                        {% endfor %}
-                    </select>
+                    
+                    <div class="filter-group">
+                        <label for="filtro_torre">Torre:</label>
+                        <select id="filtro-torre" name="filtro-torre">
+                            <option value="">Todas</option>
+                            {% for torre in torres %}
+                                <option value="{{ torre }}">{{ torre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 
-            </div>
-            
-            <div class="bottom-filters">
-                <div class="filter-group">
-                    <label for="filtro_resp">Responsável:</label>
-                    <select name="filtro-resp" id="filtro-resp">
-                        <option value="">Todos</option>
-                        <option value="{{ user.email }}">Eu</option>
-                        {% for u in usuarios %}
-                            <option value="{{ u.email }}">{{ u.username }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+                <div class="bottom-filters">
+                    <div class="filter-group">
+                        <label for="filtro_resp">Responsável:</label>
+                        <select name="filtro-resp" id="filtro-resp">
+                            <option value="">Todos</option>
+                            <option value="{{ user.email }}">Eu</option>
+                            {% for u in usuarios %}
+                                <option value="{{ u.email }}">{{ u.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+        
+                    <div class="filter-group">
+                        <label for="filtro_recep">Receptor:</label>
+                        <select name="filtro-recep" id="filtro-recep">
+                            <option value="">Todos</option>
+                            <option value="{{ user.email }}">Eu</option>
+                            {% for u in usuarios %}
+                                <option value="{{ u.email }}">{{ u.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+        
+                    <div class="filter-group">
+                        <label for="filtro_status">Status:</label>
+                        <select name="filtro-status" id="filtro_status">
+                            <option value="">Todos</option>
+                            <option value="concluido">Concluído</option>
+                            <option value="pendente">Pendente</option>
+                        </select>
+                    </div>
     
-                <div class="filter-group">
-                    <label for="filtro_recep">Receptor:</label>
-                    <select name="filtro-recep" id="filtro-recep">
-                        <option value="">Todos</option>
-                        <option value="{{ user.email }}">Eu</option>
-                        {% for u in usuarios %}
-                            <option value="{{ u.email }}">{{ u.username }}</option>
-                        {% endfor %}
-                    </select>
+                    <button type="submit" class="btn-pesquisa">Pesquisar</button>
                 </div>
-    
-                <div class="filter-group">
-                    <label for="filtro_status">Status:</label>
-                    <select name="filtro-status" id="filtro_status">
-                        <option value="">Todos</option>
-                        <option value="concluido">Concluído</option>
-                        <option value="pendente">Pendente</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-pesquisa">Pesquisar</button>
-
             </div>
         </form>
         
-        <table>
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Criado em</th>
-                    <th>Torre</th>
-                    <th>Responsável</th>
-                    <th>Receptor</th>
-                    <th>Status</th>
-                    <th>Concluído em</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for passagem in passagens %}
-                <tr>
-                    <td>{{ passagem.titulo }}</td>
-                    <td>{{ passagem.criado_em|date:"d/m/Y H:i:s" }}</td>
-                    <td>{{ passagem.torre.numero }}</td>
-                    <td>{{ passagem.responsavel.username }}</td>
-                    <td>{{ passagem.receptor.username }}</td>
-                    <td>
+        <div class="card-container">
+            {% for passagem in passagens %}
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ passagem.titulo }}</h3>
+                    <p>Criado em: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</p>
+                    {% if passagem.concluida %}
+                    <img src="{% static 'images/verificar.png' %}" alt="Verificado" class="verificar-img">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <p>Torre: {{ passagem.torre.numero }}</p>
+                    <p>Responsável: {{ passagem.responsavel.username }}</p>
+                    <p>Receptor: {{ passagem.receptor.username }}</p>
+                    <p>Status: 
                         {% if passagem.concluida %}
                             Concluído
                         {% else %}
                             Pendente
                         {% endif %}
-                    </td>
-                    <td>{{ passagem.finalizado_em|date:"d/m/Y H:i:s"|default:"" }}</td>
-                    {% if not passagem.concluida and passagem.responsavel == user %}
-                    <td class="edit-td">
-                        <a class="edit" href="/troca-turno/painel/{{ passagem.id }}">Editar</a>
-                    </td>
-                    {% else %}
-                    <td class="edit-td">
-                        <a class="edit view-only" href="/troca-turno/painel/view/{{ passagem.id }}">Visualizar</a>
-                    </td>
+                    </p>
+                    {% if passagem.concluida %}
+                    <p>Concluído em: {{ passagem.finalizado_em|date:"d/m/Y H:i:s"|default:"" }}</p>
                     {% endif %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </div>
+                <div class="card-footer">
+                    {% if not passagem.concluida and passagem.responsavel == user %}
+                    <a class="edit" href="/troca-turno/painel/{{ passagem.id }}">Editar</a>
+                    {% else %}
+                    <a class="edit view-only" href="/troca-turno/painel/view/{{ passagem.id }}">Visualizar</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

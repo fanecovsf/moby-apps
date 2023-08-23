@@ -186,7 +186,7 @@ class Views:
                 if anexos:
                     for anexo in anexos:
                         anexo_save = AnexoService.create(passagem=passagem)
-                        anexo_save.arquivo.save(anexo.name, File(anexo))
+                        anexo_save.arquivo.save(anexo.name, anexo)
 
                 passagem.titulo = titulo
                 passagem.descricao = descricao
@@ -204,6 +204,7 @@ class Views:
 
                 return redirect('painel-principal')
 
+        print(passagem.anexos)
         return render(request, 'edit-passagem.html', context={
             'passagem':passagem,
             'usuarios':usuarios

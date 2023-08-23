@@ -114,3 +114,9 @@ input {
     font-size: 16px;
     text-align: center;
 }
+
+.logo {
+    height: 100px;
+    width: auto;
+    text-align: center;
+}

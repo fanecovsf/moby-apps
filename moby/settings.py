@@ -111,6 +111,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "troca_turno/static"),
+    os.path.join(BASE_DIR, "global/static")
 )
 
 STATIC_URL = 'static/'

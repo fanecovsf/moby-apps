@@ -51,7 +51,6 @@ body {
 .btn:hover, .btn-pesquisa:hover {
     background-color: #13263d;
     color: #fff;
-    transform: scale(1.1);
 }
 
 /* Filtros */

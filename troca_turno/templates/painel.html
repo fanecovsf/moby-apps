@@ -10,6 +10,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="logo" class="logo">
+        </div>
         <div class="user-info">
             <h1>Bem-vindo, {{ user.username }}</h1>
             <p class="small">Email: {{ user.email }}</p>
@@ -89,9 +92,6 @@
                 <div class="card-header">
                     <h3>{{ passagem.titulo }}</h3>
                     <p class="card-line">Criado em: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</p>
-                    {% if passagem.concluida %}
-                    <img src="{% static 'images/verificar.png' %}" alt="Verificado" class="verificar-img">
-                    {% endif %}
                 </div>
                 <div class="card-body">
                     <p class="card-line"><img src="{% static 'images/torres.png' %}" alt="Torre" class="icon"> Torre: {{ passagem.torre.numero }}</p>
@@ -105,7 +105,7 @@
                         {% endif %}
                     </p>
                     {% if passagem.concluida %}
-                    <p>Concluído em: {{ passagem.finalizado_em|date:"d/m/Y H:i:s"|default:"" }}</p>
+                    <p class="card-line"><img src="{% static 'images/verificar.png' %}" alt="Status" class="icon">Finalizado em: {{ passagem.finalizado_em|date:"d/m/Y H:i:s"|default:"" }}</p>
                     {% endif %}
                 </div>
                 <div class="card-footer">

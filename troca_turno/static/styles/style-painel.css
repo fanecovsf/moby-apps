@@ -108,7 +108,7 @@ body {
     margin: 10px;
     box-shadow: 2px 0px 10px rgba(255, 255, 255, 0.445);
     align-items: center;
-    width: 280px;
+    width: 300px;
     height: 330px;
     overflow: auto;
 }
@@ -167,8 +167,8 @@ a.view-only {
 }
 
 .icon {
-    height: 30px; /* Ajuste a altura conforme necessário */
-    width: 30px;  /* Ajuste a largura conforme necessário */
+    height: 27px; /* Ajuste a altura conforme necessário */
+    width: 27px;  /* Ajuste a largura conforme necessário */
     margin-right: 5px;
 }
 
@@ -191,5 +191,11 @@ a.view-only {
     justify-content: center; 
     align-items: center;     
     margin-top: auto;       
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    text-align: center;
 }
 

@@ -18,7 +18,7 @@
         <form action="{% url 'edit-passagem' passagem.id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" value="{{ passagem.titulo }}" maxlength="60" required>
+            <input type="text" id="titulo" name="titulo" value="{{ passagem.titulo }}" maxlength="30" required>
             
             <label for="descricao">Descrição:</label>
             <textarea id="descricao" class="in-desc" name="descricao" rows="10" maxlength="5000" required>{{ passagem.descricao }}</textarea>

@@ -91,11 +91,12 @@
         <div class="card-container">
             {% for passagem in passagens %}
             <div class="card">
-                <div class="card-header">
+                <div class="card-header card-title">
                     <h3>{{ passagem.titulo }}</h3>
-                    <p class="card-line">Criado em: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</p>
+                    
                 </div>
                 <div class="card-body">
+                    <p class="card-line">Criado em: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</p>
                     <p class="card-line"><img src="{% static 'images/torres.png' %}" alt="Torre" class="icon"> Torre: {{ passagem.torre.numero }}</p>
                     <p class="card-line"><img src="{% static 'images/responsavel.png' %}" alt="Responsável" class="icon"> Responsável: {{ passagem.responsavel.username }}</p>
                     <p class="card-line"><img src="{% static 'images/receptor.png' %}" alt="Receptor" class="icon"> Receptor: {{ passagem.receptor.username }}</p>

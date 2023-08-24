@@ -10,5 +10,5 @@ urlpatterns = [
     path('painel/registro-passagem', Views.registro_passagem, name='registro-passagem'),
     path('painel/<id>', Views.edit_passagem, name='edit-passagem'),
     path('painel/view/<id>', Views.view_passagem, name='view-passagem'),
-    path('logout/', auth_views.LoginView.as_view(next_page='login'), name='logout')
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout')
 ]

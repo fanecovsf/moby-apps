@@ -1,16 +1,11 @@
 body {
     font-family: Arial, Arial, Helvetica, sans-serif;
-    /* Define um gradiente linear que combina azul e amarelo */
-    background: linear-gradient(45deg, #f1c40f, #3498db, #f1c40f);
-    /* Definir altura completa para cobrir todo o viewport */
+    background: #13263d;
     height: 100vh;
-    /* Centralizar conteúdo verticalmente */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Configurar fonte e cor do texto */
     font-family: Arial, sans-serif;
-    color: #fff;
     font-size: 24px;
     font-weight: bold;
     text-align: center;

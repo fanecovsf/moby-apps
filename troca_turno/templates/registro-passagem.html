@@ -17,7 +17,7 @@
         <form action="{% url 'registro-passagem' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" maxlength="60" required>
+            <input type="text" id="titulo" name="titulo" maxlength="30" required>
             
             <label for="descricao">Descrição:</label>
             <textarea id="descricao" name="descricao" rows="10" class="in-desc" maxlength="5000" required></textarea>

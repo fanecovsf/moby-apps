@@ -112,6 +112,13 @@ body {
     overflow: auto;
 }
 
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 .card h3 { /* Adicionado para centralizar o título */
     text-align: center;
     margin: 0; /* Removido a margem para melhor alinhamento */
@@ -183,6 +190,12 @@ a.view-only {
 
 .btn-torre {
     margin-right: 40px;
+}
+
+.btn-sair {
+    margin-left: 650px;
+    background-color: #ba3b3b;
+    color: #fff;
 }
 
 .card-footer {

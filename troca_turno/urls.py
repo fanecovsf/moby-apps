@@ -12,6 +12,9 @@ urlpatterns = [
     path('painel/<id>', Views.edit_passagem, name='edit-passagem'),
     path('painel/view/<id>', Views.view_passagem, name='view-passagem'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+]
 
-    path('mongo/', test_view, name='mongo-test')
+#Mongo paths
+urlpatterns += [
+    path('mongo/', test_view, name='mongo-test'),
 ]

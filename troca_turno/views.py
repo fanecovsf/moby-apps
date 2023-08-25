@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
+from django.utils import timezone
 
 from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, AnexoService
 
@@ -45,11 +46,11 @@ class Views:
         torres = TorreService.query_for_user(request)
         usuarios = MobyUserService.op_filter(request)
 
-        data_final = datetime.date.today()
-        data_inicial = data_final - datetime.timedelta(days=2)
-
-        filtro_inicial = str(data_inicial) + " 00:00:00"
-        filtro_final = str(data_final) + " 23:59:59"
+        data_final = timezone.make_aware(timezone.datetime.now().replace(hour=23, minute=59, second=59))
+        data_inicial = data_final - timezone.timedelta(days=2)
+        
+        data_final = data_final.strftime("%Y-%m-%d %H:%M:%S")
+        data_inicial = data_inicial.strftime("%Y-%m-%d %H:%M:%S")
 
         if request.method == 'POST':
             data_inicio = request.POST.get('data-inicio')
@@ -70,7 +71,11 @@ class Views:
 
             if data_inicio and data_fim:
                 data_inicio = data_inicio + " 00:00:00"
+                data_inicio = timezone.datetime.strptime(data_inicio, "%Y-%m-%d %H:%M:%S")
+
                 data_fim = data_fim + " 23:59:59"
+                data_fim = timezone.datetime.strptime(data_fim, "%Y-%m-%d %H:%M:%S")
+
                 passagens = passagens.filter(criado_em__range=(data_inicio,data_fim))
 
             if filtro_torre:
@@ -93,15 +98,13 @@ class Views:
             })
 
         if request.method == 'GET':
-            passagens = passagens.filter(criado_em__range=(filtro_inicial, filtro_final))
+            passagens = passagens.filter(criado_em__range=(data_inicial, data_final))
 
             return render(request, 'painel.html', context={
                 'user':user,
                 'passagens':passagens,
                 'torres': torres,
                 'usuarios': usuarios,
-                'data_inicial': str(data_inicial),
-                'data_final': str(data_final)
             })
     
 

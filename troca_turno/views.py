@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.utils import timezone
 
-from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, AnexoService
+from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService
 
 import datetime
 
@@ -133,7 +133,7 @@ class Views:
         user = request.user
 
         torres = TorreService.query_for_user(request)
-        usuarios = MobyUserService.query_all()
+        usuarios = MobyUserService.exclude_email(user.email)
 
         if request.method == 'POST':
             try:
@@ -147,23 +147,12 @@ class Views:
                     torre=torre,
                     responsavel=user,
                     receptor=receptor
-                )
+                )    
 
-                if passagem:
-                    anexos = request.FILES.getlist('anexos')
-
-                    if anexos:
-                        for anexo in anexos:
-                            anexo_save = AnexoService.create(passagem=passagem)
-                            anexo_save.arquivo.save(anexo.name, File(anexo))
-
-                    return redirect('painel-principal')
-
-                else:
-                    return HttpResponse({'error':'Erro ao criar a passagem'})
+                return redirect('painel-principal')
 
             except Exception as e:
-                return HttpResponse(e)
+                return HttpResponse({'error':'Erro ao criar a passagem', 'descricao':e})
 
         return render(request, 'registro-passagem.html', context={
             'torres':torres,
@@ -174,7 +163,7 @@ class Views:
     @login_required(login_url='/troca-turno/login/')
     def edit_passagem(request, id):
         passagem = PassagemService.get(id)
-        usuarios = MobyUserService.op_filter(request)
+        usuarios = MobyUserService.op_filter(request).exclude(email=request.user.email)
 
         if request.method == 'POST':
 
@@ -184,12 +173,6 @@ class Views:
                 titulo = request.POST.get('titulo')
                 descricao = request.POST.get('descricao')
                 receptor = MobyUserService.get_email(request.POST.get('receptor'))
-
-                anexos = request.FILES.getlist('anexos')
-                if anexos:
-                    for anexo in anexos:
-                        anexo_save = AnexoService.create(passagem=passagem)
-                        anexo_save.arquivo.save(anexo.name, anexo)
 
                 passagem.titulo = titulo
                 passagem.descricao = descricao
@@ -207,7 +190,6 @@ class Views:
 
                 return redirect('painel-principal')
 
-        print(passagem.anexos)
         return render(request, 'edit-passagem.html', context={
             'passagem':passagem,
             'usuarios':usuarios

@@ -36,6 +36,7 @@ class MobyUser(AbstractUser):
 
     email = models.EmailField(("email_address"), unique=True)
     operacao = models.ForeignKey(Operacao, related_name='operacoesUser', on_delete=models.PROTECT, blank=True, null=True)
+    nome_atlas = models.CharField(max_length=255, unique=True, blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -84,7 +85,3 @@ class Passagem(models.Model):
     def __str__(self) -> str:
         return self.titulo
 
-
-class Anexo(models.Model):
-    passagem = models.ForeignKey(Passagem, on_delete=models.CASCADE, related_name='anexos')
-    arquivo = models.FileField(upload_to=Utils.attachment_file_path, null=True, blank=True)

@@ -1,4 +1,4 @@
-from troca_turno.models import MobyUser, Passagem, Torre, Operacao, Anexo
+from troca_turno.models import MobyUser, Passagem, Torre, Operacao
 
 from django.contrib.auth import authenticate, login
 from django.db import IntegrityError
@@ -11,6 +11,11 @@ class MobyUserService:
     @staticmethod
     def query_all():
         usuarios = MobyUser.objects.using(DATABASE).all()
+        return usuarios
+    
+    @staticmethod
+    def exclude_email(email):
+        usuarios = MobyUser.objects.exclude(email=email)
         return usuarios
     
     @staticmethod
@@ -133,21 +138,3 @@ class OperacaoService:
         operacao = Operacao.objects.using(DATABASE).get(nome=nome)
         return operacao
     
-
-class AnexoService:
-
-    @staticmethod
-    def query_all():
-        anexos = Anexo.objects.using(DATABASE).all()
-        return anexos
-    
-    @staticmethod
-    def create(passagem):
-        anexo = Anexo.objects.using(DATABASE).create(passagem=passagem)
-
-        if anexo:
-            return anexo
-        
-        else:
-            return None
-

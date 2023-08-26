@@ -35,20 +35,6 @@
             
             <label>Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
             
-            <label for="anexo">Anexos:</label>
-            {% if passagem.anexos.all %}
-                <ul>
-                    {% for anexo in passagem.anexos.all %}
-                        <li><a href="{{ anexo.arquivo.url }}" target="_blank">{{ anexo.arquivo.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Nenhum anexo disponível.</p>
-            {% endif %}
-
-            <label for="anexos">Novos anexos:</label>
-            <input type="file" id="anexos" name="anexos" multiple>
-            
             <div class="btn-group">
                 <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Voltar</a>
                 <button type="button" class="btn btn-salvar" onclick="setAcao('salvar')">Salvar</button>

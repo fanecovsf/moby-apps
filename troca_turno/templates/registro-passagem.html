@@ -34,13 +34,11 @@
             
             <label for="receptor">Receptor:</label>
             <select id="receptor" name="receptor" required>
+                <option value="" selected></option>
                 {% for u in usuarios %}
                 <option value="{{u.email}}">{{u.username}}</option>
                 {% endfor %}
             </select>
-            
-            <label for="anexo">Anexos:</label>
-            <input type="file" id="anexo" name="anexos" multiple>
             
             <div class="btn-group">
                 <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Cancelar</a>

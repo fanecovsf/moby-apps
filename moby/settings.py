@@ -71,6 +71,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+
+    'mongo-default': {
+        'ENGINE': 'djongo',
+        'NAME': 'db-test',
     }
 }
 

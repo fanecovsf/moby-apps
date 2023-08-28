@@ -5,7 +5,7 @@ from troca_turno.views import Views
 from troca_turno.mongo_views import test_view
 
 urlpatterns = [
-    path('login/', Views.login_app, name='login'),
+    path("", Views.red_painel, name="red-painel"),
     path('painel/', Views.painel_principal, name='painel-principal'),
     path('painel/cadastro-torre/', Views.cadastro_torre, name='cadastro-torre'),
     path('painel/registro-passagem', Views.registro_passagem, name='registro-passagem'),

@@ -75,7 +75,17 @@ DATABASES = {
 
     'mongo-default': {
         'ENGINE': 'djongo',
-        'NAME': 'db-test',
+        'ENFORCE_SCHEMA': False,
+        'NAME': 'BR',
+        'CLIENT': {
+            'host': '18.116.109.6',
+            'port': 9991,
+            'username': 'adm_bd01',
+            'password': 'RxI65A09uRKY',
+            'authSource': 'admin',
+            'directConnection': True,
+            'readPreference': 'secondary',
+        }
     }
 }
 

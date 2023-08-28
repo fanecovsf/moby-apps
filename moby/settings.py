@@ -1,6 +1,18 @@
 from pathlib import Path
 import os
 
+MONGO_PASSWORD_PATH = r'C:\Users\gustavo.faneco\OneDrive - MOBY\Documents\Projects\Python\moby-apps\moby\config.txt'
+
+#Capturing password
+with open(MONGO_PASSWORD_PATH, 'r') as file:
+    lines = file.readlines()
+
+for line in lines:
+    key, value = line.strip().split("=")
+
+    if key == 'mongo_password':
+        mongo_password = value
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -81,7 +93,7 @@ DATABASES = {
             'host': '18.116.109.6',
             'port': 9991,
             'username': 'adm_bd01',
-            'password': 'RxI65A09uRKY',
+            'password': mongo_password,
             'authSource': 'admin',
             'directConnection': True,
             'readPreference': 'secondary',

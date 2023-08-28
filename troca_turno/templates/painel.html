@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'styles/style-painel.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'icon/icon.ico' %}">
-    <title>Passagens</title>
+    <title>Passagem de turno</title>
 </head>
 <body>
     <div class="container">
@@ -20,7 +20,7 @@
             <p class="small">Sua operação: {{ user.operacao }}</p>
         </div>
         <div class="btn-container">
-            <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Adicionar Torre</a>
+            <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Cadastrar Torre</a>
             <a href="{% url 'registro-passagem' %}" class="btn btn-registrar">Registrar Passagem</a>
             <a href="{% url 'logout' %}" class="btn btn-sair">Logout</a>
         </div>

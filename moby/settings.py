@@ -10,8 +10,8 @@ with open(MONGO_PASSWORD_PATH, 'r') as file:
 for line in lines:
     key, value = line.strip().split("=")
 
-    if key == 'mongo_password':
-        mongo_password = value
+    if key == 'postgre_password':
+        postgre_password = value
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,20 +85,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
 
-    'mongo-default': {
-        'ENGINE': 'djongo',
-        'ENFORCE_SCHEMA': False,
-        'NAME': 'BR',
-        'CLIENT': {
-            'host': '18.116.109.6',
-            'port': 9991,
-            'username': 'adm_bd01',
-            'password': mongo_password,
-            'authSource': 'admin',
-            'directConnection': True,
-            'readPreference': 'secondary',
-        }
+    'BD01-VIBRA': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'BD01-VIBRA',
+        'USER': 'postgres',
+        'PASSWORD': postgre_password,
+        'HOST': '4.228.57.67',
+        'PORT': '5432'
     }
+
 }
 
 

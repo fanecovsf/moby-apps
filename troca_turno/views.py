@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.core.files import File
 from django.utils import timezone
 
 from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService

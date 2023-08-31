@@ -2,7 +2,6 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 from troca_turno.views import Views
-from troca_turno.mongo_views import test_view
 
 urlpatterns = [
     path("", Views.red_painel, name="red-painel"),
@@ -14,7 +13,4 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
 
-#Mongo paths
-urlpatterns += [
-    path('mongo/', test_view, name='mongo-test'),
-]
+

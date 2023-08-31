@@ -1,10 +1,11 @@
-from troca_turno.models import MobyUser, Passagem, Torre, Operacao
+from troca_turno.models import MobyUser, Passagem, Torre, Operacao, Viagens
 
 from django.contrib.auth import authenticate, login
 from django.db import IntegrityError
 
 
 DATABASE = 'default'
+VIBRA_DATABASE = 'BD01-VIBRA'
 
 class MobyUserService:
 
@@ -138,3 +139,15 @@ class OperacaoService:
         operacao = Operacao.objects.using(DATABASE).get(nome=nome)
         return operacao
     
+
+class ViagensService:
+
+    @staticmethod
+    def query_all():
+        viagens = Viagens.objects.using(VIBRA_DATABASE).all()
+        return viagens
+    
+    @staticmethod
+    def filter_dt(dt):
+        viagem = Viagens.objects.get(idPlanoViagem=dt)
+        return viagem

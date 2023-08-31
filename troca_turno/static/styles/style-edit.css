@@ -79,7 +79,8 @@ form select {
 
 .btn-salvar:hover,
 .btn-concluir:hover,
-.btn-cancelar:hover {
+.btn-cancelar:hover,
+.btn-add:hover {
     background-color: #13263d;
     color: #fff;
     transform: scale(1.1);
@@ -93,6 +94,11 @@ form select {
 .btn-cancelar {
     background-color: #ba3b3b;
     color: #fff;
+}
+
+.btn-add {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .in-desc {

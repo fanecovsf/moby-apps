@@ -32,6 +32,13 @@
                     <option value="{{u.email}}" {% if u.email == passagem.receptor.email %}selected{% endif %}>{{u.username}}</option>
                 {% endfor %}
             </select>
+
+            <div class="dt-select">
+                <label for="DT 1" class="dt-label">DT 1</label>
+                <input type="text" name="DT 1" class="dt-input">
+            </div>
+
+            <button type="button" class="btn btn-add">Adicionar DT</button>
             
             <label>Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
             

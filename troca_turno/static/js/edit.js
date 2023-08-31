@@ -4,7 +4,7 @@ function setAcao(acao) {
 }
 
 function confirmAndSetAcao(acao) {
-    var confirmationMessage = "Deseja realmente finalizar a passagem? Não será possível editar após a finalização";
+    let confirmationMessage = "Deseja realmente finalizar a passagem? Não será possível editar após a finalização";
     if (confirm(confirmationMessage)) {
         setAcao(acao);
     }

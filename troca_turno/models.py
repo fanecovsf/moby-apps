@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 from troca_turno.util.util import Utils
@@ -15,6 +16,10 @@ class Viagens(models.Model):
 
     def __str__(self):
         return self.idPlanoViagem
+    
+    class Meta:
+        db_table = '"public"."Viagens"'
+        managed = False
 
 
 
@@ -94,6 +99,8 @@ class Passagem(models.Model):
         related_name='passagem_receptor',
         on_delete=models.DO_NOTHING
     )
+
+    dt_lista = models.JSONField(max_length=255, blank=True, null=True)
 
     concluida = models.BooleanField(default=False)
 

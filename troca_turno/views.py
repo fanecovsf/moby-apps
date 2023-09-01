@@ -3,7 +3,8 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService
+from troca_turno.models import Viagens
+from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, ViagensService
 
 import datetime
 
@@ -165,6 +166,36 @@ class Views:
                 passagem.save()
 
                 return redirect('painel-principal')
+            
+            if acao == 'add-dt':
+                dt = request.POST.get('DT')
+
+                if dt is not '':
+                    try:
+                        dt = ViagensService.filter_dt(dt)
+
+                        num_dts = len(passagem.dt_lista)
+
+                        data = {
+                            f'dt{num_dts+1}':dt.idPlanoViagem
+                        }
+
+                        dt_lista = passagem.dt_lista or []
+
+                        value_exists = any(dt.idPlanoViagem == item for item in dt_lista.values())
+                        
+                        if value_exists:
+                            print('DT já está na lista')
+
+                        else:
+                            PassagemService.add_dt(passagem=passagem, data=data)
+                            print('DT adicionada')
+
+                    except Viagens.DoesNotExist:
+                        print('DT não existe.')
+                else:
+                    print('Digite um valor')
+
 
         return render(request, 'edit-passagem.html', context={
             'passagem':passagem,

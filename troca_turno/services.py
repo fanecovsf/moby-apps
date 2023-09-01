@@ -92,6 +92,15 @@ class PassagemService:
         
         except IntegrityError as e:
             return e
+        
+    @staticmethod
+    def add_dt(passagem:Passagem, data):
+        if passagem.dt_lista is None:
+            passagem.dt_lista = {}
+         
+        passagem.dt_lista.update(data)
+        passagem.save()
+
     
 
 class TorreService:
@@ -149,5 +158,6 @@ class ViagensService:
     
     @staticmethod
     def filter_dt(dt):
-        viagem = Viagens.objects.get(idPlanoViagem=dt)
+        viagem = Viagens.objects.using(VIBRA_DATABASE).get(idPlanoViagem=dt)
         return viagem
+            

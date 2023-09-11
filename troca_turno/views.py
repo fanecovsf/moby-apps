@@ -139,6 +139,10 @@ class Views:
 
     @login_required(login_url='/login/')
     def edit_passagem(request, id):
+        popup_exists = False
+        popup_added = False
+        popup_dt_exists = False
+        popup_blank = False
         passagem = PassagemService.get(id)
         usuarios = MobyUserService.op_filter(request).exclude(email=request.user.email)
 
@@ -170,7 +174,7 @@ class Views:
             if acao == 'add-dt':
                 dt = request.POST.get('DT')
 
-                if dt is not '':
+                if dt != '':
                     try:
                         dt = ViagensService.filter_dt(dt)
 
@@ -183,23 +187,30 @@ class Views:
                         dt_lista = passagem.dt_lista or []
 
                         value_exists = any(dt.idPlanoViagem == item for item in dt_lista.values())
+
+                        
                         
                         if value_exists:
-                            print('DT já está na lista')
+                            popup_exists = True
 
                         else:
+                            popup_added = True
                             PassagemService.add_dt(passagem=passagem, data=data)
-                            print('DT adicionada')
 
                     except Viagens.DoesNotExist:
-                        print('DT não existe.')
+                        popup_dt_exists = True
+
                 else:
-                    print('Digite um valor')
+                    popup_blank = True
 
 
         return render(request, 'edit-passagem.html', context={
             'passagem':passagem,
-            'usuarios':usuarios
+            'usuarios':usuarios,
+            'popup_exists':popup_exists,
+            'popup_added':popup_added,
+            'popup_dt_exists':popup_dt_exists,
+            'popup_blank':popup_blank,
         })
     
     

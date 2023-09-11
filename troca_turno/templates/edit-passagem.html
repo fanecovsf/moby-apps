@@ -7,11 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="{% static 'styles/style-edit.css' %}" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="{% static 'icon/icon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="{% static 'js/edit.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <title>Editar Passagem</title>
 </head>
 <body>
     <div class="container">
+
+        {% if popup_exists %}
+            <script>
+                showPopupAlreadyExists();
+            </script>
+        {% endif %}
+
+        {% if popup_added %}
+            <script>
+                showPopupAdded();
+            </script>
+        {% endif %}
+
+        {% if popup_dt_exists %}
+            <script>
+                showPopupDoesntExists();
+            </script>
+        {% endif %}
+
+        {% if popup_blank %}
+            <script>
+                showPopupBlank();
+            </script>
+        {% endif %}
+        
+        
         <div class="header">
             <h1>Editar Passagem</h1>
         </div>
@@ -37,6 +65,8 @@
                 <label for="DT" class="dt-label">DT's</label>
                 <input type="text" name="DT" class="dt-input">
             </div>
+
+            
 
             <button type="button" class="btn btn-add" onclick="setAcao('add-dt')">Adicionar DT</button>
             

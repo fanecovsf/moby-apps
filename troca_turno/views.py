@@ -3,7 +3,6 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from troca_turno.models import Viagens
 from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, ViagensService
 
 import datetime
@@ -193,12 +192,12 @@ class Views:
                             num_dts = 0
 
                         data = {
-                            f'dt{num_dts+1}':dt.idPlanoViagem
+                            f'dt{num_dts+1}':dt['idPlanoViagem']
                         }
 
                         dt_lista = passagem.dt_lista or {}
 
-                        value_exists = any(dt.idPlanoViagem == item for item in dt_lista.values())  
+                        value_exists = any(dt['idPlanoViagem'] == item for item in dt_lista.values())  
                         
                         if value_exists:
                             popup_exists = True
@@ -207,7 +206,7 @@ class Views:
                             popup_added = True
                             PassagemService.add_dt(passagem=passagem, data=data)
 
-                    except Viagens.DoesNotExist:
+                    except:
                         popup_dt_exists = True
 
                 else:

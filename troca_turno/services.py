@@ -1,7 +1,9 @@
-from troca_turno.models import MobyUser, Passagem, Torre, Operacao, Viagens
+from troca_turno.models import MobyUser, Passagem, Torre, Operacao
 
 from django.contrib.auth import authenticate, login
 from django.db import IntegrityError
+
+import requests
 
 
 DATABASE = 'default'
@@ -162,13 +164,11 @@ class OperacaoService:
 
 class ViagensService:
 
-    @staticmethod
-    def query_all():
-        viagens = Viagens.objects.using(VIBRA_DATABASE).all()
-        return viagens
     
     @staticmethod
     def filter_dt(dt):
-        viagem = Viagens.objects.using(VIBRA_DATABASE).get(idPlanoViagem=dt)
+        viagem = requests.get(f'http://192.168.0.102:3003/vibra-api/viagens/{str(dt)}/')
+        viagem = viagem.json()
+
         return viagem
             

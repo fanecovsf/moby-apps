@@ -5,25 +5,6 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from troca_turno.util.util import Utils
 
 
-#Tables já existentes
-class Viagens(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
-    idPlanoViagem = models.CharField(max_length=50)
-    idVeiculo = models.CharField(max_length=100)
-    idCarreta = models.CharField(max_length=7)
-    transportador = models.CharField(max_length=1000)
-
-
-    def __str__(self):
-        return self.idPlanoViagem
-    
-    class Meta:
-        db_table = '"public"."Viagens"'
-        managed = False
-
-
-
-#Tables novas
 class Operacao(models.Model):
     nome = models.CharField(max_length=255, unique=True)
 

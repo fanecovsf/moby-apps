@@ -38,6 +38,12 @@
                 showPopupBlank();
             </script>
         {% endif %}
+
+        {% if popup_delete %}
+            <script>
+                showPopupDelete();
+            </script>
+        {% endif %}
         
         
         <div class="header">
@@ -73,6 +79,7 @@
                         <th>Placa carreta</th>
                         <th>Transportador</th>
                         <th>Atlas</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,12 +92,17 @@
                         <td>{{ dt.idCarreta }}</td>
                         <td>{{ dt.transportador }}</td>
                         <td>
-                            <a href="http://monitor.atlasgr.com.br/monitor?dt={{ dt.idPlanoViagem }}" target="_blank">Acessar monitor</a>
+                            <a href="http://monitor.atlasgr.com.br/monitor?dt={{ dt.idPlanoViagem }}" target="_blank">Monitor</a>
+                        </td>
+                        <td>
+                            <button class="btn btn-delete" onclick="setDtDelete('delete-dt', {{ dt.idPlanoViagem }})">Remover</button>
                         </td>
                     </tr>
                     {% endfor %}
                     {% endif %}
 
+                    <input type="hidden" name="dt-delete" value="" id="dt-delete">
+                
                 </tbody>
                 </table>
             </div>
@@ -112,7 +124,7 @@
                 <button type="button" class="btn btn-salvar" onclick="setAcao('salvar')">Salvar</button>
                 <button type="button" class="btn btn-concluir" onclick="confirmAndSetAcao('finalizar')">Finalizar</button>
 
-                <input type="hidden" name="acao" value="salvar" id="acao">
+                <input type="hidden" name="acao" value="" id="acao">
             </div>
         </form>
     </div>

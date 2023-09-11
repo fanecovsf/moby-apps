@@ -83,7 +83,6 @@ form select {
 .btn-add:hover {
     background-color: #13263d;
     color: #fff;
-    transform: scale(1.1);
 }
 
 .btn-registrar {
@@ -164,4 +163,21 @@ form select {
 .created {
     margin-top: 5px;
     margin-bottom: 20px;
+}
+
+.btn-delete {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #ba3b3b;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #13263d;
+    color: #fff;
 }

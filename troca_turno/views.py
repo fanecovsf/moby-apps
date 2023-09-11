@@ -143,6 +143,7 @@ class Views:
         popup_added = False
         popup_dt_exists = False
         popup_blank = False
+        popup_delete = False
         passagem = PassagemService.get(id)
         usuarios = MobyUserService.op_filter(request).exclude(email=request.user.email)
         dts = PassagemService.query_dts(passagem)
@@ -212,6 +213,21 @@ class Views:
                 else:
                     popup_blank = True
 
+            if acao == 'delete-dt':
+                dt = request.POST.get('dt-delete')
+                PassagemService.remove_dt(passagem, dt)
+                popup_delete = True
+                
+
+        dts = PassagemService.query_dts(passagem)
+
+        dt_list = []
+
+        if dts:
+            for value in dts.values():
+                dt = ViagensService.filter_dt(value)
+                dt_list.append(dt)
+
 
         return render(request, 'edit-passagem.html', context={
             'passagem':passagem,
@@ -221,6 +237,7 @@ class Views:
             'popup_dt_exists':popup_dt_exists,
             'popup_blank':popup_blank,
             'dt_list':dt_list,
+            'popup_delete':popup_delete,
         })
     
     

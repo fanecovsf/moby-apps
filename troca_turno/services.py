@@ -102,6 +102,12 @@ class PassagemService:
         passagem.save()
 
     @staticmethod
+    def remove_dt(passagem:Passagem, dt):
+        new_data = {chave: valor for chave, valor in passagem.dt_lista.items() if valor != dt}
+        passagem.dt_lista = new_data
+        passagem.save()
+
+    @staticmethod
     def query_dts(passagem:Passagem):
         return passagem.dt_lista
             

@@ -97,12 +97,71 @@ form select {
 }
 
 .btn-add {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding: 8px 15px;
+    margin-bottom: 40px;
 }
 
 .in-desc {
     width: 600px;
     max-width: 600px;
     max-height: 300px;
+}
+
+.table-dts table {
+    width: 100%; /* A tabela ocupa 100% da largura da div */
+    border-collapse: collapse; /* Remove espaçamento entre células */
+}
+
+.table-dts th {
+    background-color: #13263d; /* Cor de fundo do cabeçalho da tabela */
+    color: #fff; /* Cor do texto do cabeçalho da tabela */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto no cabeçalho */
+    font-size: 14px; /* Tamanho da fonte */
+}
+
+.table-dts td {
+    padding: 10px; /* Espaçamento interno */
+    border-top: 1px solid #ddd; /* Linhas de separação entre as células */
+    font-size: 12px; /* Tamanho da fonte menor */
+    text-align: center; /* Centraliza o texto nas células */
+}
+
+.table-dts tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+.table-dts tbody tr a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: #ff5506;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.table-dts tbody tr a:hover {
+    background-color: #13263d;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.add-dt {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.dt-input {
+    width: 450px;
+}
+
+.created {
+    margin-top: 5px;
+    margin-bottom: 20px;
 }

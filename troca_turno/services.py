@@ -101,6 +101,11 @@ class PassagemService:
         passagem.dt_lista.update(data)
         passagem.save()
 
+    @staticmethod
+    def query_dts(passagem:Passagem):
+        return passagem.dt_lista
+            
+
     
 
 class TorreService:

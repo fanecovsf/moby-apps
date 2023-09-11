@@ -44,6 +44,7 @@
             <h1>Editar Passagem</h1>
         </div>
         <form action="{% url 'edit-passagem' passagem.id %}" method="post" enctype="multipart/form-data">
+            <label class="created">Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
             {% csrf_token %}
             <label for="titulo">Título:</label>
             <input type="text" id="titulo" name="titulo" value="{{ passagem.titulo }}" maxlength="30" required>
@@ -61,16 +62,50 @@
                 {% endfor %}
             </select>
 
-            <div class="dt-select">
-                <label for="DT" class="dt-label">DT's</label>
-                <input type="text" name="DT" class="dt-input">
+            
+
+            <div class="table-dts">
+                <table>
+                <thead>
+                    <tr>
+                        <th>DT</th>
+                        <th>Placa</th>
+                        <th>Placa carreta</th>
+                        <th>Transportador</th>
+                        <th>Atlas</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% if dt_list %}
+                    {% for dt in dt_list %}
+                    <tr>
+                        <td>{{ dt.idPlanoViagem }}</td>
+                        <td>{{ dt.idVeiculo }}</td>
+                        <td>{{ dt.idCarreta }}</td>
+                        <td>{{ dt.transportador }}</td>
+                        <td>
+                            <a href="http://monitor.atlasgr.com.br/monitor?dt={{ dt.idPlanoViagem }}" target="_blank">Acessar monitor</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+
+                </tbody>
+                </table>
             </div>
 
-            
+            <br>
 
-            <button type="button" class="btn btn-add" onclick="setAcao('add-dt')">Adicionar DT</button>
+            <div class="add-dt">
+                <div class="dt-select">
+                    <input type="text" name="DT" class="dt-input" placeholder="Digite a DT">
+                </div>
+
+                <button type="button" class="btn btn-add" onclick="setAcao('add-dt')">Adicionar DT</button>
+            </div>
             
-            <label>Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
+            
             
             <div class="btn-group">
                 <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Voltar</a>

@@ -145,6 +145,14 @@ class Views:
         popup_blank = False
         passagem = PassagemService.get(id)
         usuarios = MobyUserService.op_filter(request).exclude(email=request.user.email)
+        dts = PassagemService.query_dts(passagem)
+
+        dt_list = []
+
+        if dts:
+            for value in dts.values():
+                dt = ViagensService.filter_dt(value)
+                dt_list.append(dt)
 
         if request.method == 'POST':
 
@@ -178,17 +186,18 @@ class Views:
                     try:
                         dt = ViagensService.filter_dt(dt)
 
-                        num_dts = len(passagem.dt_lista)
+                        if passagem.dt_lista:
+                            num_dts = len(passagem.dt_lista)
+                        else:
+                            num_dts = 0
 
                         data = {
                             f'dt{num_dts+1}':dt.idPlanoViagem
                         }
 
-                        dt_lista = passagem.dt_lista or []
+                        dt_lista = passagem.dt_lista or {}
 
-                        value_exists = any(dt.idPlanoViagem == item for item in dt_lista.values())
-
-                        
+                        value_exists = any(dt.idPlanoViagem == item for item in dt_lista.values())  
                         
                         if value_exists:
                             popup_exists = True
@@ -211,6 +220,7 @@ class Views:
             'popup_added':popup_added,
             'popup_dt_exists':popup_dt_exists,
             'popup_blank':popup_blank,
+            'dt_list':dt_list,
         })
     
     

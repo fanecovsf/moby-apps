@@ -22,6 +22,9 @@
         <div class="btn-container">
             <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Cadastrar Torre</a>
             <a href="{% url 'registro-passagem' %}" class="btn btn-registrar">Registrar Passagem</a>
+            {% if is_manager %}
+            <a href="{% url 'registro-usuario' %}" class="btn btn-user-register">Registrar usuário</a>
+            {% endif %}
             <a href="{% url 'logout' %}" class="btn btn-sair">Logout</a>
         </div>
         <h2 class="titulo">Passagens</h2>

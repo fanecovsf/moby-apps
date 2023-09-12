@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.contrib import messages
 
 from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, ViagensService
+from troca_turno.forms import MobyUserCreationForm
 
 import datetime
 
@@ -21,6 +23,8 @@ class Views:
         passagens = PassagemService.op_filter(request)
         torres = TorreService.query_for_user(request)
         usuarios = MobyUserService.op_filter(request)
+
+        is_manager = MobyUserService.is_manager(user)
 
         data_final = timezone.make_aware(timezone.datetime.now().replace(hour=23, minute=59, second=59))
         data_inicial = data_final - timezone.timedelta(days=2)
@@ -70,7 +74,8 @@ class Views:
                 'user':user,
                 'passagens':passagens,
                 'torres': torres,
-                'usuarios': usuarios
+                'usuarios': usuarios,
+                'is_manager': is_manager,
             })
 
         if request.method == 'GET':
@@ -81,7 +86,25 @@ class Views:
                 'passagens':passagens,
                 'torres': torres,
                 'usuarios': usuarios,
+                'is_manager': is_manager,
             })
+        
+    
+    @login_required(login_url='/login/')
+    def registro_usuario(request):
+
+        if request.method == "POST":
+            form = MobyUserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                messages.success(request, "Usuário registrado com sucesso.")
+                return redirect('painel-principal')
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"Erro no campo {field}: {error}")
+        form = MobyUserCreationForm()
+        return render(request=request, template_name="registro-usuario.html", context={"form":form})
     
 
     @login_required(login_url='/login/')

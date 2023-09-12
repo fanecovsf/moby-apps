@@ -17,6 +17,13 @@ class MobyUserService:
         return usuarios
     
     @staticmethod
+    def is_manager(user:MobyUser):
+        if user.gestor:
+            return True
+        else:
+            return False
+    
+    @staticmethod
     def exclude_email(email):
         usuarios = MobyUser.objects.exclude(email=email)
         return usuarios

@@ -189,11 +189,10 @@ a.view-only {
 }
 
 .btn-torre {
-    margin-right: 37px;
+    margin-right: 0px;
 }
 
 .btn-sair {
-    margin-left: 650px;
     background-color: #ba3b3b;
     color: #fff;
 }
@@ -209,5 +208,9 @@ a.view-only {
     height: 100px;
     width: auto;
     text-align: center;
+}
+
+.btn {
+    margin-right: 10px;
 }
 

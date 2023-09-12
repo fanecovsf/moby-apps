@@ -37,7 +37,7 @@ class MobyUser(AbstractUser):
 
     email = models.EmailField(("email_address"), unique=True)
     operacao = models.ForeignKey(Operacao, related_name='operacoesUser', on_delete=models.PROTECT, blank=True, null=True)
-    nome_atlas = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    gestor = models.BooleanField(blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

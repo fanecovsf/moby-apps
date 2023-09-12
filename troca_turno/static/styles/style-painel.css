@@ -64,8 +64,11 @@ body {
 }
 
 .btn-pesquisa {
-    margin-left: 100px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.pesquisa-container {
+    margin-left: 60px;
 }
 
 .btn:hover, .btn-pesquisa:hover {
@@ -97,9 +100,10 @@ body {
 }
 
 .filter-group {
-    width: 25%;
+    width: 20%;
     display: flex;
     flex-direction: column;
+    margin: 5px;
 }
 
 .filter-group input, .filter-group select {
@@ -107,7 +111,6 @@ body {
     background-color: #fff;
     padding: 5px;
     border-radius: 5px;
-    margin: 5px;
 }
 
 /* Cartões */
@@ -234,3 +237,36 @@ a.view-only {
     margin-right: 10px;
 }
 
+.select2-container {
+    width: 100%;
+}
+
+/* Style the dropdown arrow */
+.select2-selection__arrow {
+    background-color: #ffc000; /* Change the background color */
+    color: #13263d; /* Change the arrow color */
+}
+
+/* Style the dropdown options */
+.select2-results__option {
+    padding: 8px 12px;
+    background-color: #ffffff;
+    color: #13263d;
+}
+
+.select2-results__option--highlighted {
+    background-color: #ffc000; /* Change the highlight color */
+    color: #13263d;
+}
+
+.date-filter label {
+    color: #ffffff; /* Change label text color */
+}
+
+/* Style the date filter inputs */
+.date-filter input[type="date"] {
+    /* Add your input styles here */
+    padding: 4px 12px; /* Adjust padding as needed */
+    background-color: #ffffff; /* Change input background color */
+    color: #13263d; /* Change input text color */
+}

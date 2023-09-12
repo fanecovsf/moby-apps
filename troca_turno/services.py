@@ -119,7 +119,6 @@ class PassagemService:
     @staticmethod
     def query_dts(passagem:Passagem):
         return passagem.dt_lista
-            
 
     
 

@@ -7,7 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'styles/style-painel.css' %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{% static 'icon/icon.ico' %}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <title>Passagem de turno</title>
+    <script>
+        $(document).ready(function () {
+            $('#filtro-torre').select2();
+            $('#filtro-resp').select2();
+            $('#filtro-recep').select2();
+            $('#filtro_status').select2();
+
+            $('#filtro-torre').trigger('change');
+            $('#filtro-resp').trigger('change');
+            $('#filtro-recep').trigger('change');
+            $('#filtro_status').trigger('change');
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -34,13 +56,13 @@
             {% csrf_token %}
             <div class="filters">
                 <div class="top-filters">
-                    <div class="filter-group">
-                        <label for="data_inicio" class="data-filter">Data de criação inicial:</label>
+                    <div class="filter-group date-filter">
+                        <label for="data_inicio">Data de criação inicial:</label>
                         <input type="date" id="data_inicio" name="data-inicio" value="">
                     </div>
                     
-                    <div class="filter-group">
-                        <label for="data_fim" class="data-filter">Data de criação final:</label>
+                    <div class="filter-group date-filter">
+                        <label for="data_fim">Data de criação final:</label>
                         <input type="date" id="data_fim" name="data-fim" value="">
                     </div>
                     
@@ -52,6 +74,11 @@
                                 <option value="{{ torre }}">{{ torre }}</option>
                             {% endfor %}
                         </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="title">Título:</label>
+                        <input type="text" name="filtro-title" id="filtro-title">
                     </div>
                 </div>
                 
@@ -86,8 +113,10 @@
                             <option value="pendente">Pendente</option>
                         </select>
                     </div>
-    
+                    
+                    <div class="pesquisa-container">
                     <button type="submit" class="btn-pesquisa">Pesquisar</button>
+                    </div>
                 </div>
             </div>
         </form>

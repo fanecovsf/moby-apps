@@ -40,6 +40,7 @@ class Views:
             filtro_torre = TorreService.get(request.POST.get('filtro-torre'), request.user.operacao)
             filtro_resp = MobyUserService.get_email(request.POST.get('filtro-resp'))
             filtro_recep = MobyUserService.get_email(request.POST.get('filtro-recep'))
+            filtro_title = request.POST.get('filtro-title')
 
             filtro_status = request.POST.get('filtro-status')
             if filtro_status == 'concluido':
@@ -62,6 +63,9 @@ class Views:
 
             if filtro_torre:
                 passagens = passagens.filter(torre=filtro_torre)
+
+            if filtro_title:
+                passagens = passagens.filter(titulo__contains=filtro_title)
 
             if filtro_resp:
                 passagens = passagens.filter(responsavel=filtro_resp)

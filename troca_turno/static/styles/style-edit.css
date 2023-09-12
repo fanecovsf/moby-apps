@@ -80,7 +80,8 @@ form select {
 .btn-salvar:hover,
 .btn-concluir:hover,
 .btn-cancelar:hover,
-.btn-add:hover {
+.btn-add:hover,
+.btn-voltar:hover {
     background-color: #13263d;
     color: #fff;
 }
@@ -90,9 +91,13 @@ form select {
     color: #fff;
 }
 
-.btn-cancelar {
+.btn-cancelar, .btn-voltar {
     background-color: #ba3b3b;
     color: #fff;
+}
+
+.btn-voltar {
+    margin-top: 25px;
 }
 
 .btn-add {

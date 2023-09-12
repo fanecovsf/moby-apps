@@ -3,6 +3,8 @@ from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 from troca_turno.services import MobyUserService, PassagemService, TorreService, OperacaoService, ViagensService
 from troca_turno.forms import MobyUserCreationForm
@@ -88,6 +90,24 @@ class Views:
                 'usuarios': usuarios,
                 'is_manager': is_manager,
             })
+        
+    
+    @login_required(login_url='/login/')
+    def mudar_senha(request):
+        if request.method == 'POST':
+            form = PasswordChangeForm(request.user, request.POST)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, "Sua senha foi alterada com sucesso!")
+                return redirect('mudar-senha')
+            else:
+                messages.error(request, "Erro ao mudar sua senha, verifique a senha digitada.")
+        else:
+            form = PasswordChangeForm(request.user)
+        return render(request, 'mudar-senha.html', context={
+            'form':form
+        })
         
     
     @login_required(login_url='/login/')
@@ -288,7 +308,8 @@ class Views:
                 dt_list.append(dt)
 
         return render(request, 'view-passagem.html', context={
-            'passagem':passagem
+            'passagem': passagem,
+            'dt_list': dt_list,
         })
 
 

@@ -18,6 +18,7 @@
             <h1>Bem-vindo, {{ user.username }}</h1>
             <p class="small">Email: {{ user.email }}</p>
             <p class="small">Sua operação: {{ user.operacao }}</p>
+            <a href="{% url 'mudar-senha' %}" class="btn-user btn-pass">Alterar minha senha</a>
         </div>
         <div class="btn-container">
             <a href="{% url 'cadastro-torre' %}" class="btn btn-torre">Cadastrar Torre</a>

@@ -17,38 +17,40 @@
         </div>
         <form action="{% url 'registro-usuario' %}" method="post">
             {% csrf_token %}
-            <!-- Email -->
-            <label for="{{ form.email.id_for_label }}">Email:</label>
-            {{ form.email }}
-            {{ form.email.errors }}
-            
-            <!-- Username -->
-            <label for="{{ form.username.id_for_label }}">Username:</label>
-            {{ form.username }}
-            {{ form.username.errors }}
-            
-            <!-- Password -->
-            <label for="{{ form.password1.id_for_label }}">Password:</label>
-            {{ form.password1 }}
-            {{ form.password1.errors }}
-            
-            <!-- Confirm Password -->
-            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
-            {{ form.password2 }}
-            {{ form.password2.errors }}
-            
-            <!-- Operacao -->
-            <label for="{{ form.operacao.id_for_label }}">Operacao:</label>
-            {{ form.operacao }}
-            {{ form.operacao.errors }}
-            
-            <!-- Gestor -->
-            <label for="{{ form.gestor.id_for_label }}">Gestor:</label>
-            {{ form.gestor }}
-            {{ form.gestor.errors }}
-            
-            <!-- Submit Button -->
-            <button type="submit">Register</button>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Nome:</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Senha:</label>
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Confirme a senha:</label>
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.operacao.id_for_label }}">Operação:</label>
+                {{ form.operacao }}
+                {{ form.operacao.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.gestor.id_for_label }}">Usuário é gestor:</label>
+                {{ form.gestor }}
+                {{ form.gestor.errors }}
+            </div>
+            <div class="btn-group">
+                <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Cancelar</a>
+                <button type="submit" class="btn btn-registrar">Registrar</button>
+            </div>
         </form>
     </div>
 </body>

@@ -19,6 +19,7 @@ body {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    width: 300px;
 }
 
 .header {
@@ -47,6 +48,13 @@ body {
     border-radius: 4px;
 }
 
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #13263d;
+}
+
 .btn-group {
     display: flex;
     justify-content: space-between;
@@ -67,7 +75,8 @@ body {
 }
 
 .btn-cadastrar:hover,
-.btn-cancelar:hover {
+.btn-cancelar:hover,
+.btn-registrar:hover {
     background-color: #13263d;
     color: #fff;
     transform: scale(1.1);

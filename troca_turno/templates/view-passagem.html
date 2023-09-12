@@ -15,6 +15,7 @@
             <h1>Editar Passagem</h1>
         </div>
         <form action="{% url 'edit-passagem' passagem.id %}" method="post" enctype="multipart/form-data">
+            <label>Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
             {% csrf_token %}
             <label for="titulo">Título:</label>
             <input type="text" id="titulo" name="titulo" value="{{ passagem.titulo }}" disabled required>
@@ -32,18 +33,43 @@
                 {% endfor %}
             </select>
             
-            <label>Data de Criação: {{ passagem.criado_em|date:"d/m/Y H:i:s" }}</label>
             
-            <label for="anexo">Anexos:</label>
-            {% if passagem.anexos.all %}
-                <ul>
-                    {% for anexo in passagem.anexos.all %}
-                        <li><a href="{{ anexo.arquivo.url }}" target="_blank">{{ anexo.arquivo.name }}</a></li>
+            
+            <div class="table-dts">
+                <table>
+                <thead>
+                    <tr>
+                        <th>DT</th>
+                        <th>Placa</th>
+                        <th>Placa carreta</th>
+                        <th>Transportador</th>
+                        <th>Atlas</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% if dt_list %}
+                    {% for dt in dt_list %}
+                    <tr>
+                        <td>{{ dt.idPlanoViagem }}</td>
+                        <td>{{ dt.idVeiculo }}</td>
+                        <td>{{ dt.idCarreta }}</td>
+                        <td>{{ dt.transportador }}</td>
+                        <td>
+                            <a href="http://monitor.atlasgr.com.br/monitor?dt={{ dt.idPlanoViagem }}" target="_blank">Monitor</a>
+                        </td>
+                        <td>
+                            <button class="btn btn-delete" onclick="setDtDelete('delete-dt', {{ dt.idPlanoViagem }})">Remover</button>
+                        </td>
+                    </tr>
                     {% endfor %}
-                </ul>
-            {% else %}
-                <p>Nenhum anexo disponível.</p>
-            {% endif %}
+                    {% endif %}
+
+                    <input type="hidden" name="dt-delete" value="" id="dt-delete">
+                
+                </tbody>
+                </table>
             
             <div class="btn-group">
                 <a href="{% url 'painel-principal' %}" class="btn btn-cancelar">Voltar</a>

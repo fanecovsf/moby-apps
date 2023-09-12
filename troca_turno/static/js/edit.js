@@ -100,3 +100,37 @@ function showPopupDelete() {
         }
         }).showToast();
 }
+
+function showPopupUserCreated() {
+    Toastify({
+        text: "Usuário registrado com sucesso!",
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+        fontSize: "14px",
+        height: "auto",
+        width: "250px",
+        borderRadius: "10px",
+        background: "#0b9b42"
+        }
+        }).showToast();
+}
+
+function showPopupFailUserCreated() {
+    Toastify({
+        text: "Erro ao registrar o usuário, verifique as informações digitadas.",
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+        fontSize: "14px",
+        height: "auto",
+        width: "250px",
+        borderRadius: "10px",
+        background: "#ba3b3b"
+        }
+        }).showToast();
+}

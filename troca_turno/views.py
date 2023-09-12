@@ -92,17 +92,28 @@ class Views:
     
     @login_required(login_url='/login/')
     def registro_usuario(request):
-
+        created = 0
         if request.method == "POST":
             form = MobyUserCreationForm(request.POST)
             if form.is_valid():
-                user = form.save()
+                form.save()
                 messages.success(request, "Usuário registrado com sucesso.")
-                return redirect('painel-principal')
+                created = 1
+                return render(request, 'registro-usuario.html', context={
+                    'form': form,
+                    'created': created
+                })
             else:
+                created = 2
                 for field, errors in form.errors.items():
                     for error in errors:
                         messages.error(request, f"Erro no campo {field}: {error}")
+
+                return render(request, 'registro-usuario.html', context={
+                    'form': form,
+                    'created': created
+                })
+                
         form = MobyUserCreationForm()
         return render(request=request, template_name="registro-usuario.html", context={"form":form})
     
@@ -266,6 +277,15 @@ class Views:
     @login_required(login_url='/login/')
     def view_passagem(request, id):
         passagem = PassagemService.get(id)
+
+        dts = PassagemService.query_dts(passagem)
+
+        dt_list = []
+
+        if dts:
+            for value in dts.values():
+                dt = ViagensService.filter_dt(value)
+                dt_list.append(dt)
 
         return render(request, 'view-passagem.html', context={
             'passagem':passagem

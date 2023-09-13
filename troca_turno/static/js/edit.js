@@ -134,3 +134,37 @@ function showPopupFailUserCreated() {
         }
         }).showToast();
 }
+
+function showPopupGreen(text) {
+    Toastify({
+        text: text,
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+        fontSize: "14px",
+        height: "auto",
+        width: "250px",
+        borderRadius: "10px",
+        background: "#0b9b42"
+        }
+        }).showToast();
+}
+
+function showPopupRed(text) {
+    Toastify({
+        text: text,
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+        fontSize: "14px",
+        height: "auto",
+        width: "250px",
+        borderRadius: "10px",
+        background: "#ba3b3b"
+        }
+        }).showToast();
+}

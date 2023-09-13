@@ -16,6 +16,17 @@
     {% load crispy_forms_tags %}  
     
     <div class="container">
+        {% if popup_ok %}
+        <script>
+            showPopupGreen("Senha alterada com sucesso!")
+        </script>
+        {% endif %}
+
+        {% if popup_erro %}
+        <script>
+            showPopupRed("Erro ao alterar sua senha, verifique as informações digitadas.")
+        </script>
+        {% endif %}
 
         <div class="header">
             <h1>Alterar senha</h1>

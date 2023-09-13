@@ -98,19 +98,29 @@ class Views:
     
     @login_required(login_url='/login/')
     def mudar_senha(request):
+        popup_ok = False
+        popup_erro = False
         if request.method == 'POST':
             form = PasswordChangeForm(request.user, request.POST)
             if form.is_valid():
                 user = form.save()
                 update_session_auth_hash(request, user)
                 messages.success(request, "Sua senha foi alterada com sucesso!")
-                return redirect('mudar-senha')
+                popup_ok = True
+                return render(request, 'mudar-senha.html', context={
+                    'form': form,
+                    'popup_ok': popup_ok,
+                    'popup_erro': popup_erro
+                })
             else:
+                popup_erro = True
                 messages.error(request, "Erro ao mudar sua senha, verifique a senha digitada.")
         else:
             form = PasswordChangeForm(request.user)
         return render(request, 'mudar-senha.html', context={
-            'form':form
+            'form': form,
+            'popup_ok': popup_ok,
+            'popup_erro': popup_erro
         })
         
     
